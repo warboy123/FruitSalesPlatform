@@ -1,0 +1,48 @@
+﻿<#@ template language="C#" debug="True" #>
+<#@ output extension="cs" #>
+<#@ include file="BaseClassTemplate.tt" #>
+
+<#+
+
+
+public class EntityTemplate : CSharpTemplate
+{
+	
+	private EntityType _entitis;
+	public EntityTemplate(EntityType Entitis)
+	{
+		_entitis = Entitis;
+	}
+
+	public override string TransformText()
+	{
+		base.TransformText();
+#>
+using System;
+using System.Collections.Generic;
+namespace DTO
+{
+	public class <#= _entitis.Name.Replace("T_","")+"DTO" #>
+	{		
+<#+
+		
+		var simpleProperties = GlobaltypeMapper.GetSimpleProperties(_entitis);
+		//var propertiesWithDefaultValues = GlobaltypeMapper.GetPropertiesWithDefaultValues(_entitis);
+		var navigationProperties = GlobaltypeMapper.GetNavigationProperties(_entitis);
+		var complexProperties = GlobaltypeMapper.GetComplexProperties(_entitis);
+		foreach(var property in simpleProperties)
+        {
+#>
+		<#=codeStringGenerator.Property(property)#>
+<#+
+		}
+		
+		
+		#>		
+	}
+}
+<#+
+        return this.GenerationEnvironment.ToString();
+	}
+}
+#>

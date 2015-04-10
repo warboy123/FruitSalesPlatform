@@ -1,0 +1,95 @@
+﻿<#@ template language="C#" debug="True" #>
+<#@ output extension="cs" #>
+<#@ include file="BaseClassTemplate.tt" #>
+
+<#+
+// <copyright file="EntityTemplate.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+
+public class EntityTemplate : CSharpTemplate
+{
+	
+	private EntityType _entitis;
+	public EntityTemplate(EntityType Entitis)
+	{
+		_entitis = Entitis;
+	}
+
+	public override string TransformText()
+	{
+		base.TransformText();
+#>
+using System;
+using System.Collections.Generic;
+namespace Entities
+{
+	public class <#= _entitis.Name #>
+	{
+<#+
+    var propertiesWithDefaultValues = GlobaltypeMapper.GetPropertiesWithDefaultValues(_entitis);
+    var collectionNavigationProperties = GlobaltypeMapper.GetCollectionNavigationProperties(_entitis);
+    var complexProperties = GlobaltypeMapper.GetComplexProperties(_entitis);
+
+    if (propertiesWithDefaultValues.Any() || collectionNavigationProperties.Any() || complexProperties.Any())
+    {
+#>
+		public <#=GlobalCode.Escape(_entitis)#>()
+		{
+<#+
+        foreach (var edmProperty in propertiesWithDefaultValues)
+        {
+#>
+			this.<#=GlobalCode.Escape(edmProperty)#> = <#=GlobaltypeMapper.CreateLiteral(edmProperty.DefaultValue)#>;
+<#+
+        }
+
+        foreach (var navigationProperty in collectionNavigationProperties)
+        {
+#>
+			this.<#=GlobalCode.Escape(navigationProperty)#> = new HashSet<<#=GlobaltypeMapper.GetTypeName(navigationProperty.ToEndMember.GetEntityType())#>>();
+<#+
+        }
+
+        foreach (var complexProperty in complexProperties)
+        {
+#>
+			this.<#=GlobalCode.Escape(complexProperty)#> = new <#=GlobaltypeMapper.GetTypeName(complexProperty.TypeUsage)#>();
+<#+
+        }
+#>
+		}		
+<#+
+    }
+		var simpleProperties = GlobaltypeMapper.GetSimpleProperties(_entitis);
+		//var propertiesWithDefaultValues = GlobaltypeMapper.GetPropertiesWithDefaultValues(_entitis);
+		var navigationProperties = GlobaltypeMapper.GetNavigationProperties(_entitis);
+		
+		foreach(var property in simpleProperties)
+        {
+#>
+		<#=codeStringGenerator.Property(property)#>
+<#+
+		}
+		
+    if (navigationProperties.Any())
+    {
+#>
+
+<#+
+        foreach (var navigationProperty in navigationProperties)
+        {
+#>
+		<#=codeStringGenerator.NavigationProperty(navigationProperty)#>
+<#+
+        }
+    }
+		
+		#>		
+	}
+}
+<#+
+        return this.GenerationEnvironment.ToString();
+	}
+}
+#>

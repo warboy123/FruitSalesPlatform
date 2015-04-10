@@ -1,0 +1,37 @@
+﻿<#@ template language="C#" debug="True" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ output extension="cs" #>
+<#@ include file="T4Toolbox.tt" #>
+<#@ include file="EntityTemplate.tt" #>
+<#@ output extension=".cs" encoding="UTF-8"#>
+<#
+
+	string curPath = Path.GetDirectoryName(Host.TemplateFile);
+	string destPath = Path.Combine(curPath, @"..\");
+	if(!Directory.Exists(destPath))
+	{
+		Directory.CreateDirectory(destPath);
+	}
+	const string inputFile = @"..\..\DataMould\SQLServer.edmx";
+	var textTransform = DynamicTextTransformation.Create(this);
+	var code = new CodeGenerationTools(this);
+	GlobalCode=new CodeGenerationTools(this);
+	var ef = new MetadataTools(this);
+	GlobaltypeMapper = new TypeMapper(code, ef, textTransform.Errors);
+	codeStringGenerator = new CodeStringGenerator(code, GlobaltypeMapper, ef);
+	var itemCollection = new EdmMetadataLoader(textTransform.Host, textTransform.Errors).CreateEdmItemCollection(inputFile);
+	foreach (var entity in GlobaltypeMapper.GetItemsToGenerate<EntityType>(itemCollection))
+	{
+		EntityTemplate template = new EntityTemplate(entity);
+		string fileName = string.Format(@"{0}\{1}.cs", destPath, entity.Name);
+		template.Output.Encoding = Encoding.UTF8;
+		if(File.Exists(fileName))
+		{
+			File.Delete(fileName);
+		}
+		template.RenderToFile(fileName);
+	}
+#>
