@@ -11,6 +11,7 @@ namespace DTO
 	{		
 		public int T_UserID { get; set; }
 		public string UserName { get; set; }
+
 		public System.DateTime Birthday { get; set; }
 		
 	}
