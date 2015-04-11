@@ -62,10 +62,25 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SqlServer.edmx</DependentUpon>
     </Compile>
-    <Compile Include="T_shop.cs">
+    <Compile Include="T_Fruits.cs">
+      <DependentUpon>SqlServer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T_Place.cs">
+      <DependentUpon>SqlServer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T_PostAddress.cs">
+      <DependentUpon>SqlServer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T_ProductOrders.cs">
+      <DependentUpon>SqlServer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T_Products.cs">
       <DependentUpon>SqlServer.tt</DependentUpon>
     </Compile>
     <Compile Include="T_User.cs">
+      <DependentUpon>SqlServer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T_UserOrders.cs">
       <DependentUpon>SqlServer.tt</DependentUpon>
     </Compile>
   </ItemGroup>

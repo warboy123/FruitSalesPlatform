@@ -14,14 +14,17 @@ namespace Mvc.Controllers
         //
         // GET: /Home/
         IUserService IUser;
-        public HomeController(IUserService User)
+        IFruitsService IFruits;
+        public HomeController(IUserService User, IFruitsService Fruits)
         {
             IUser = User;
+            IFruits = Fruits;
         }
         [MvcActionFilterAttribute(IsCheck = false)]
         public ActionResult Index()
         {
             IList<UserDTO> userList= IUser.GetList().ToList();
+            
             if (!userList.Any())
             {
                 IUser.Add(new UserDTO { UserName = "张三"});
@@ -32,6 +35,9 @@ namespace Mvc.Controllers
             }
             return View();
         }
-        
+        public JsonResult GetUser(string ID)
+        {
+            return Json(new UserDTO { }, JsonRequestBehavior.AllowGet);
+        }
     }
 }

@@ -4,9 +4,19 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="81233057dab04d438d0c0ca3e29716da" Name="关系图1" >
-        <EntityTypeShape EntityType="SqlServer.T_User" Width="1.5" PointX="3.75" PointY="1.375" />
-        <EntityTypeShape EntityType="SqlServer.T_shop" Width="1.5" PointX="7.75" PointY="2.5" />
+      <Diagram DiagramId="81233057dab04d438d0c0ca3e29716da" Name="关系图1" ZoomLevel="98" >
+        <EntityTypeShape EntityType="SqlServer.T_User" Width="1.5" PointX="4.125" PointY="1" />
+        <EntityTypeShape EntityType="SqlServer.T_Products" Width="1.5" PointX="7.375" PointY="1" />
+        <EntityTypeShape EntityType="SqlServer.T_Fruits" Width="1.5" PointX="9.625" PointY="1" />
+        <EntityTypeShape EntityType="SqlServer.T_PostAddress" Width="1.5" PointX="2" PointY="1.25" />
+        <AssociationConnector Association="SqlServer.T_UserT_PostAddress" />
+        <AssociationConnector Association="SqlServer.T_ProductsT_Fruits" />
+        <EntityTypeShape EntityType="SqlServer.T_UserOrders" Width="1.875" PointX="6" PointY="3.375" />
+        <EntityTypeShape EntityType="SqlServer.T_ProductOrders" Width="2.125" PointX="8.5" PointY="3.625" />
+        <AssociationConnector Association="SqlServer.T_UserT_UserOrders" />
+        <AssociationConnector Association="SqlServer.T_UserOrdersT_ProductOrders" />
+        <AssociationConnector Association="SqlServer.T_ProductsT_ProductOrders" />
+        <EntityTypeShape EntityType="SqlServer.T_Place" Width="1.5" PointX="2.75" PointY="4" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

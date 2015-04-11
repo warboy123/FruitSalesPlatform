@@ -7,37 +7,307 @@
     <Schema Namespace="SqlServer.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityContainer Name="SqlServerStoreContainer">
     <EntitySet Name="T_User" EntityType="SqlServer.Store.T_User" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_Products" EntityType="SqlServer.Store.T_Products" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_Fruits" EntityType="SqlServer.Store.T_Fruits" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_PostAddress" EntityType="SqlServer.Store.T_PostAddress" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_ProductOrder" EntityType="SqlServer.Store.T_ProductOrder" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_ProductOrders" EntityType="SqlServer.Store.T_ProductOrders" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_Place" EntityType="SqlServer.Store.T_Place" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="T_UserT_PostAddress" Association="SqlServer.Store.T_UserT_PostAddress">
+      <End Role="T_User" EntitySet="T_User" />
+      <End Role="T_PostAddress" EntitySet="T_PostAddress" />
+    </AssociationSet>
+    <AssociationSet Name="T_ProductsT_Fruits" Association="SqlServer.Store.T_ProductsT_Fruits">
+      <End Role="T_Products" EntitySet="T_Products" />
+      <End Role="T_Fruits" EntitySet="T_Fruits" />
+    </AssociationSet>
+    <AssociationSet Name="T_UserT_UserOrders" Association="SqlServer.Store.T_UserT_UserOrders">
+      <End Role="T_User" EntitySet="T_User" />
+      <End Role="T_UserOrders" EntitySet="T_ProductOrder" />
+    </AssociationSet>
+    <AssociationSet Name="T_UserOrdersT_ProductOrders" Association="SqlServer.Store.T_UserOrdersT_ProductOrders">
+      <End Role="T_UserOrders" EntitySet="T_ProductOrder" />
+      <End Role="T_ProductOrders" EntitySet="T_ProductOrders" />
+    </AssociationSet>
+    <AssociationSet Name="T_ProductsT_ProductOrders" Association="SqlServer.Store.T_ProductsT_ProductOrders">
+      <End Role="T_Products" EntitySet="T_Products" />
+      <End Role="T_ProductOrders" EntitySet="T_ProductOrders" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="T_User">
     <Key>
       <PropertyRef Name="T_UserID" />
     </Key>
     <Property Name="T_UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="100" />
     <Property Name="Birthday" Type="datetime" Nullable="false" />
+    <Property Name="Sexy" Type="tinyint" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="LoginNum" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="PassWord" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Phone" Type="nvarchar" Nullable="false" MaxLength="50" />
   </EntityType>
+  <EntityType Name="T_Products">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OriginalPrice" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SalePrice" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SalesVolume" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="T_Fruits">
+    <Key>
+      <PropertyRef Name="FruitID" />
+    </Key>
+    <Property Name="FruitID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FruitName" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="HowToEat" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="Detail" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ProductSeason" Type="tinyint" Nullable="false" />
+    <Property Name="T_Products_ProductID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="T_PostAddress">
+    <Key>
+      <PropertyRef Name="PostAddressID" />
+    </Key>
+    <Property Name="PostAddressID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" Nullable="false" MaxLength="300" />
+    <Property Name="IsDefault" Type="bit" Nullable="false" />
+    <Property Name="Phone" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="ContentName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Tel" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Detail" Type="nvarchar" Nullable="false" MaxLength="500" />
+    <Property Name="T_User_T_UserID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="T_ProductOrder">
+    <Key>
+      <PropertyRef Name="T_UserOrdersID" />
+    </Key>
+    <Property Name="T_UserOrdersID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateCreate" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Amount" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SaleAmount" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="OrderStatus" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LogisticsNum" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DatePay" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateConfirm" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="T_User_T_UserID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="T_ProductOrders">
+    <Key>
+      <PropertyRef Name="T_ProductOrdersID" />
+    </Key>
+    <Property Name="T_ProductOrdersID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="count" Type="int" Nullable="false" />
+    <Property Name="T_UserOrders_T_UserOrdersID" Type="int" Nullable="false" />
+    <Property Name="T_Products_ProductID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="T_Place">
+    <Key>
+      <PropertyRef Name="T_PlaceID" />
+    </Key>
+    <Property Name="T_PlaceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PlaceName" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="PlaceType" Type="int" Nullable="false" />
+    <Property Name="PlaceFatherID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="T_UserT_PostAddress">
+    <End Role="T_User" Type="SqlServer.Store.T_User" Multiplicity="1" />
+    <End Role="T_PostAddress" Type="SqlServer.Store.T_PostAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_User">
+        <PropertyRef Name="T_UserID" />
+      </Principal>
+      <Dependent Role="T_PostAddress">
+        <PropertyRef Name="T_User_T_UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="T_ProductsT_Fruits">
+    <End Role="T_Products" Type="SqlServer.Store.T_Products" Multiplicity="1" />
+    <End Role="T_Fruits" Type="SqlServer.Store.T_Fruits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_Products">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="T_Fruits">
+        <PropertyRef Name="T_Products_ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="T_UserT_UserOrders">
+    <End Role="T_User" Type="SqlServer.Store.T_User" Multiplicity="1" />
+    <End Role="T_UserOrders" Type="SqlServer.Store.T_ProductOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_User">
+        <PropertyRef Name="T_UserID" />
+      </Principal>
+      <Dependent Role="T_UserOrders">
+        <PropertyRef Name="T_User_T_UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="T_UserOrdersT_ProductOrders">
+    <End Role="T_UserOrders" Type="SqlServer.Store.T_ProductOrder" Multiplicity="1" />
+    <End Role="T_ProductOrders" Type="SqlServer.Store.T_ProductOrders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_UserOrders">
+        <PropertyRef Name="T_UserOrdersID" />
+      </Principal>
+      <Dependent Role="T_ProductOrders">
+        <PropertyRef Name="T_UserOrders_T_UserOrdersID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="T_ProductsT_ProductOrders">
+    <End Role="T_Products" Type="SqlServer.Store.T_Products" Multiplicity="1" />
+    <End Role="T_ProductOrders" Type="SqlServer.Store.T_ProductOrders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_Products">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="T_ProductOrders">
+        <PropertyRef Name="T_Products_ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="SqlServer" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
         <EntityContainer Name="SqlServerContainer" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="T_User" EntityType="SqlServer.T_User" />
-          <EntitySet Name="T_shop集" EntityType="SqlServer.T_shop" />
+          <EntitySet Name="T_Products" EntityType="SqlServer.T_Products" />
+          <EntitySet Name="T_Fruits" EntityType="SqlServer.T_Fruits" />
+          <EntitySet Name="T_PostAddress" EntityType="SqlServer.T_PostAddress" />
+          <AssociationSet Name="T_UserT_PostAddress" Association="SqlServer.T_UserT_PostAddress">
+            <End Role="T_User" EntitySet="T_User" />
+            <End Role="T_PostAddress" EntitySet="T_PostAddress" />
+          </AssociationSet>
+          <AssociationSet Name="T_ProductsT_Fruits" Association="SqlServer.T_ProductsT_Fruits">
+            <End Role="T_Products" EntitySet="T_Products" />
+            <End Role="T_Fruits" EntitySet="T_Fruits" />
+          </AssociationSet>
+          <EntitySet Name="T_ProductOrder" EntityType="SqlServer.T_UserOrders" />
+          <EntitySet Name="T_ProductOrders" EntityType="SqlServer.T_ProductOrders" />
+          <AssociationSet Name="T_UserT_UserOrders" Association="SqlServer.T_UserT_UserOrders">
+            <End Role="T_User" EntitySet="T_User" />
+            <End Role="T_UserOrders" EntitySet="T_ProductOrder" />
+          </AssociationSet>
+          <AssociationSet Name="T_UserOrdersT_ProductOrders" Association="SqlServer.T_UserOrdersT_ProductOrders">
+            <End Role="T_UserOrders" EntitySet="T_ProductOrder" />
+            <End Role="T_ProductOrders" EntitySet="T_ProductOrders" />
+          </AssociationSet>
+          <AssociationSet Name="T_ProductsT_ProductOrders" Association="SqlServer.T_ProductsT_ProductOrders">
+            <End Role="T_Products" EntitySet="T_Products" />
+            <End Role="T_ProductOrders" EntitySet="T_ProductOrders" />
+          </AssociationSet>
+          <EntitySet Name="T_Place" EntityType="SqlServer.T_Place" />
         </EntityContainer>
         <EntityType Name="T_User">
           <Key>
             <PropertyRef Name="T_UserID" />
           </Key>
           <Property Type="Int32" Name="T_UserID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="UserName" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="100" />
           <Property Type="DateTime" Name="Birthday" Nullable="false" />
+          <Property Type="Byte" Name="Sexy" Nullable="false" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="LoginNum" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="PassWord" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Phone" Nullable="false" MaxLength="50" />
+          <NavigationProperty Name="T_PostAddress" Relationship="SqlServer.T_UserT_PostAddress" FromRole="T_User" ToRole="T_PostAddress" />
+          <NavigationProperty Name="T_UserOrders" Relationship="SqlServer.T_UserT_UserOrders" FromRole="T_User" ToRole="T_UserOrders" />
         </EntityType>
-        <EntityType Name="T_shop">
+        <EntityType Name="T_Products">
           <Key>
-            <PropertyRef Name="ShopID" />
+            <PropertyRef Name="ProductID" />
           </Key>
-          <Property Type="Int32" Name="ShopID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ProductID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="OriginalPrice" Nullable="false" />
+          <Property Type="String" Name="SalePrice" Nullable="false" />
+          <Property Type="String" Name="SalesVolume" Nullable="false" />
+          <NavigationProperty Name="T_Fruits" Relationship="SqlServer.T_ProductsT_Fruits" FromRole="T_Products" ToRole="T_Fruits" />
+          <NavigationProperty Name="T_ProductOrders" Relationship="SqlServer.T_ProductsT_ProductOrders" FromRole="T_Products" ToRole="T_ProductOrders" />
         </EntityType>
+        <EntityType Name="T_Fruits">
+          <Key>
+            <PropertyRef Name="FruitID" />
+          </Key>
+          <Property Type="Int32" Name="FruitID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="FruitName" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="HowToEat" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Detail" Nullable="false" MaxLength="Max" />
+          <Property Type="Byte" Name="ProductSeason" Nullable="false" />
+          <NavigationProperty Name="T_Products" Relationship="SqlServer.T_ProductsT_Fruits" FromRole="T_Fruits" ToRole="T_Products" />
+        </EntityType>
+        <EntityType Name="T_PostAddress">
+          <Key>
+            <PropertyRef Name="PostAddressID" />
+          </Key>
+          <Property Type="Int32" Name="PostAddressID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Address" Nullable="false" MaxLength="300" />
+          <Property Type="Boolean" Name="IsDefault" Nullable="false" />
+          <NavigationProperty Name="T_User" Relationship="SqlServer.T_UserT_PostAddress" FromRole="T_PostAddress" ToRole="T_User" />
+          <Property Type="String" Name="Phone" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ContentName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Tel" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Detail" Nullable="false" MaxLength="500" />
+        </EntityType>
+        <Association Name="T_UserT_PostAddress">
+          <End Type="SqlServer.T_User" Role="T_User" Multiplicity="1" />
+          <End Type="SqlServer.T_PostAddress" Role="T_PostAddress" Multiplicity="*" />
+        </Association>
+        <Association Name="T_ProductsT_Fruits">
+          <End Type="SqlServer.T_Products" Role="T_Products" Multiplicity="1" />
+          <End Type="SqlServer.T_Fruits" Role="T_Fruits" Multiplicity="*" />
+        </Association>
+        <EntityType Name="T_UserOrders">
+          <Key>
+            <PropertyRef Name="T_UserOrdersID" />
+          </Key>
+          <Property Type="Int32" Name="T_UserOrdersID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="DateCreate" Nullable="false" />
+          <Property Type="String" Name="Amount" Nullable="false" />
+          <Property Type="String" Name="SaleAmount" Nullable="false" />
+          <Property Type="String" Name="OrderStatus" Nullable="false" />
+          <Property Type="String" Name="LogisticsNum" Nullable="false" />
+          <Property Type="String" Name="DatePay" Nullable="false" />
+          <Property Type="String" Name="DateConfirm" Nullable="false" />
+          <NavigationProperty Name="T_User" Relationship="SqlServer.T_UserT_UserOrders" FromRole="T_UserOrders" ToRole="T_User" />
+          <NavigationProperty Name="T_ProductOrders" Relationship="SqlServer.T_UserOrdersT_ProductOrders" FromRole="T_UserOrders" ToRole="T_ProductOrders" />
+        </EntityType>
+        <EntityType Name="T_ProductOrders">
+          <Key>
+            <PropertyRef Name="T_ProductOrdersID" />
+          </Key>
+          <Property Type="Int32" Name="T_ProductOrdersID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="count" Nullable="false" />
+          <NavigationProperty Name="T_UserOrders" Relationship="SqlServer.T_UserOrdersT_ProductOrders" FromRole="T_ProductOrders" ToRole="T_UserOrders" />
+          <NavigationProperty Name="T_Products" Relationship="SqlServer.T_ProductsT_ProductOrders" FromRole="T_ProductOrders" ToRole="T_Products" />
+        </EntityType>
+        <Association Name="T_UserT_UserOrders">
+          <End Type="SqlServer.T_User" Role="T_User" Multiplicity="1" />
+          <End Type="SqlServer.T_UserOrders" Role="T_UserOrders" Multiplicity="*" />
+        </Association>
+        <Association Name="T_UserOrdersT_ProductOrders">
+          <End Type="SqlServer.T_UserOrders" Role="T_UserOrders" Multiplicity="1" />
+          <End Type="SqlServer.T_ProductOrders" Role="T_ProductOrders" Multiplicity="*" />
+        </Association>
+        <Association Name="T_ProductsT_ProductOrders">
+          <End Type="SqlServer.T_Products" Role="T_Products" Multiplicity="1" />
+          <End Type="SqlServer.T_ProductOrders" Role="T_ProductOrders" Multiplicity="*" />
+        </Association>
+        <EntityType Name="T_Place">
+          <Key>
+            <PropertyRef Name="T_PlaceID" />
+          </Key>
+          <Property Type="Int32" Name="T_PlaceID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="PlaceName" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="PlaceType" Nullable="false" />
+          <Property Type="Int32" Name="PlaceFatherID" Nullable="false" />
+          </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -50,9 +320,120 @@
           <ScalarProperty Name="T_UserID" ColumnName="T_UserID" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+          <ScalarProperty Name="Sexy" ColumnName="Sexy" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="LoginNum" ColumnName="LoginNum" />
+          <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="T_Products">
+      <EntityTypeMapping TypeName="IsTypeOf(SqlServer.T_Products)">
+        <MappingFragment StoreEntitySet="T_Products">
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="OriginalPrice" ColumnName="OriginalPrice" />
+          <ScalarProperty Name="SalePrice" ColumnName="SalePrice" />
+          <ScalarProperty Name="SalesVolume" ColumnName="SalesVolume" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_Fruits">
+      <EntityTypeMapping TypeName="IsTypeOf(SqlServer.T_Fruits)">
+        <MappingFragment StoreEntitySet="T_Fruits">
+          <ScalarProperty Name="FruitID" ColumnName="FruitID" />
+          <ScalarProperty Name="FruitName" ColumnName="FruitName" />
+          <ScalarProperty Name="HowToEat" ColumnName="HowToEat" />
+          <ScalarProperty Name="Detail" ColumnName="Detail" />
+          <ScalarProperty Name="ProductSeason" ColumnName="ProductSeason" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_PostAddress">
+      <EntityTypeMapping TypeName="IsTypeOf(SqlServer.T_PostAddress)">
+        <MappingFragment StoreEntitySet="T_PostAddress">
+          <ScalarProperty Name="PostAddressID" ColumnName="PostAddressID" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="ContentName" ColumnName="ContentName" />
+          <ScalarProperty Name="Tel" ColumnName="Tel" />
+          <ScalarProperty Name="Detail" ColumnName="Detail" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_ProductOrder">
+      <EntityTypeMapping TypeName="IsTypeOf(SqlServer.T_UserOrders)">
+        <MappingFragment StoreEntitySet="T_ProductOrder">
+          <ScalarProperty Name="T_UserOrdersID" ColumnName="T_UserOrdersID" />
+          <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="SaleAmount" ColumnName="SaleAmount" />
+          <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+          <ScalarProperty Name="LogisticsNum" ColumnName="LogisticsNum" />
+          <ScalarProperty Name="DatePay" ColumnName="DatePay" />
+          <ScalarProperty Name="DateConfirm" ColumnName="DateConfirm" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_ProductOrders">
+      <EntityTypeMapping TypeName="IsTypeOf(SqlServer.T_ProductOrders)">
+        <MappingFragment StoreEntitySet="T_ProductOrders">
+          <ScalarProperty Name="T_ProductOrdersID" ColumnName="T_ProductOrdersID" />
+          <ScalarProperty Name="count" ColumnName="count" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_Place">
+      <EntityTypeMapping TypeName="IsTypeOf(SqlServer.T_Place)">
+        <MappingFragment StoreEntitySet="T_Place">
+          <ScalarProperty Name="T_PlaceID" ColumnName="T_PlaceID" />
+          <ScalarProperty Name="PlaceName" ColumnName="PlaceName" />
+          <ScalarProperty Name="PlaceType" ColumnName="PlaceType" />
+          <ScalarProperty Name="PlaceFatherID" ColumnName="PlaceFatherID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="T_UserT_PostAddress" TypeName="SqlServer.T_UserT_PostAddress" StoreEntitySet="T_PostAddress">
+      <EndProperty Name="T_User">
+        <ScalarProperty Name="T_UserID" ColumnName="T_User_T_UserID" />
+      </EndProperty>
+      <EndProperty Name="T_PostAddress">
+        <ScalarProperty Name="PostAddressID" ColumnName="PostAddressID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="T_ProductsT_Fruits" TypeName="SqlServer.T_ProductsT_Fruits" StoreEntitySet="T_Fruits">
+      <EndProperty Name="T_Products">
+        <ScalarProperty Name="ProductID" ColumnName="T_Products_ProductID" />
+      </EndProperty>
+      <EndProperty Name="T_Fruits">
+        <ScalarProperty Name="FruitID" ColumnName="FruitID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="T_UserT_UserOrders" TypeName="SqlServer.T_UserT_UserOrders" StoreEntitySet="T_ProductOrder">
+      <EndProperty Name="T_User">
+        <ScalarProperty Name="T_UserID" ColumnName="T_User_T_UserID" />
+      </EndProperty>
+      <EndProperty Name="T_UserOrders">
+        <ScalarProperty Name="T_UserOrdersID" ColumnName="T_UserOrdersID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="T_UserOrdersT_ProductOrders" TypeName="SqlServer.T_UserOrdersT_ProductOrders" StoreEntitySet="T_ProductOrders">
+      <EndProperty Name="T_UserOrders">
+        <ScalarProperty Name="T_UserOrdersID" ColumnName="T_UserOrders_T_UserOrdersID" />
+      </EndProperty>
+      <EndProperty Name="T_ProductOrders">
+        <ScalarProperty Name="T_ProductOrdersID" ColumnName="T_ProductOrdersID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="T_ProductsT_ProductOrders" TypeName="SqlServer.T_ProductsT_ProductOrders" StoreEntitySet="T_ProductOrders">
+      <EndProperty Name="T_Products">
+        <ScalarProperty Name="ProductID" ColumnName="T_Products_ProductID" />
+      </EndProperty>
+      <EndProperty Name="T_ProductOrders">
+        <ScalarProperty Name="T_ProductOrdersID" ColumnName="T_ProductOrdersID" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
