@@ -9,9 +9,23 @@ namespace Entities
 {
 	public class T_User
 	{
-		public int T_UserID { get; set; }
+		public T_User()
+		{
+			this.Enabled = true;
+			this.T_PostAddress = new HashSet<T_PostAddress>();
+			this.T_UserOrders = new HashSet<T_UserOrders>();
+		}		
+		public int UserID { get; set; }
 		public string UserName { get; set; }
 		public System.DateTime Birthday { get; set; }
+		public byte Sexy { get; set; }
+		public string Email { get; set; }
+		public string LoginNum { get; set; }
+		public string PassWord { get; set; }
+		public string Phone { get; set; }
+		public bool Enabled { get; set; }
+		public virtual ICollection<T_PostAddress> T_PostAddress { get; set; }
+		public virtual ICollection<T_UserOrders> T_UserOrders { get; set; }
 		
 	}
 }

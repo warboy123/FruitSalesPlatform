@@ -7,17 +7,17 @@ using System;
 using System.Collections.Generic;
 namespace DTO
 {
-	public class UserDTO
+	public class SupplierDTO
 	{		
-		public int UserID { get; set; }
-		public string UserName { get; set; }
-		public System.DateTime Birthday { get; set; }
-		public byte Sexy { get; set; }
-		public string Email { get; set; }
-		public string LoginNum { get; set; }
-		public string PassWord { get; set; }
+		public int SupplierID { get; set; }
+		public string Name { get; set; }
+		public string Address { get; set; }
+		public string Tel { get; set; }
 		public string Phone { get; set; }
+		public string Contacts { get; set; }
+		public string Detail { get; set; }
 		public bool Enabled { get; set; }
+		public int PlaceID { get; set; }
 		
 	}
 }

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{26E075D1-A34B-43D2-BA96-F8CD16353115}</ProjectGuid>
+    <ProjectGuid>{19CD3ADF-17FB-4236-9068-181B9AD0065A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Entities</RootNamespace>
-    <AssemblyName>Entities</AssemblyName>
+    <RootNamespace>DataSeeds</RootNamespace>
+    <AssemblyName>DataSeeds</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,25 +39,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="C_ProductFruits.cs" />
+    <Compile Include="FruitsSeed.cs" />
+    <Compile Include="InventorySeed.cs" />
+    <Compile Include="PlaceSeed.cs" />
+    <Compile Include="PostAddressSeed.cs" />
+    <Compile Include="ProductFruitsSeed.cs" />
+    <Compile Include="ProductOrdersSeed.cs" />
+    <Compile Include="ProductsSeed.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StockinSeed.cs" />
+    <Compile Include="StorageSeed.cs" />
+    <Compile Include="SupplierFruitSeed.cs" />
+    <Compile Include="SupplierSeed.cs" />
+    <Compile Include="Template\BaseClassTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BaseClassTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Include="Template\EntitisBuild1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EntitisBuild.tt</DependentUpon>
     </Compile>
-    <Compile Include="T_Fruits.cs" />
-    <Compile Include="T_Inventory.cs" />
-    <Compile Include="T_Place.cs" />
-    <Compile Include="T_PostAddress.cs" />
-    <Compile Include="T_ProductOrders.cs" />
-    <Compile Include="T_Products.cs" />
-    <Compile Include="T_Stockin.cs" />
-    <Compile Include="T_Storage.cs" />
-    <Compile Include="T_Supplier.cs" />
-    <Compile Include="T_SupplierFruit.cs" />
-    <Compile Include="T_User.cs" />
-    <Compile Include="T_UserOrders.cs" />
+    <Compile Include="UserOrdersSeed.cs" />
+    <Compile Include="UserSeed.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Template\BaseClassTemplate.tt">
@@ -68,19 +76,19 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>EntitisBuild1.cs</LastGenOutput>
       <LastOutputs>
-..\C_ProductFruits.cs
-..\T_Fruits.cs
-..\T_Inventory.cs
-..\T_Place.cs
-..\T_PostAddress.cs
-..\T_ProductOrders.cs
-..\T_Products.cs
-..\T_Stockin.cs
-..\T_Storage.cs
-..\T_Supplier.cs
-..\T_SupplierFruit.cs
-..\T_User.cs
-..\T_UserOrders.cs
+..\FruitsSeed.cs
+..\InventorySeed.cs
+..\PlaceSeed.cs
+..\PostAddressSeed.cs
+..\ProductFruitsSeed.cs
+..\ProductOrdersSeed.cs
+..\ProductsSeed.cs
+..\StockinSeed.cs
+..\StorageSeed.cs
+..\SupplierFruitSeed.cs
+..\SupplierSeed.cs
+..\UserOrdersSeed.cs
+..\UserSeed.cs
 .\EntitisBuild1.cs
 </LastOutputs>
     </None>
@@ -90,7 +98,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <ProjectReference Include="..\DTO\DTO.csproj">
+      <Project>{1b7ff698-9ca9-4ff7-bad9-ccd6136397c2}</Project>
+      <Name>DTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entities\Entities.csproj">
+      <Project>{26e075d1-a34b-43d2-ba96-f8cd16353115}</Project>
+      <Name>Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

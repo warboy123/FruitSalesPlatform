@@ -20,9 +20,11 @@ public class EntityTemplate : CSharpTemplate
 #>
 using System;
 using System.Collections.Generic;
-namespace DTO
+using Entities;
+using DTO;
+namespace DataSeeds
 {
-	public class <#= _entitis.Name.Replace("T_","").Replace("C_","")+"DTO" #>
+	public class <#= _entitis.Name.Replace("T_","").Replace("C_","")+"Seed" #>
 	{		
 <#+
 		
@@ -30,16 +32,35 @@ namespace DTO
 		//var propertiesWithDefaultValues = GlobaltypeMapper.GetPropertiesWithDefaultValues(_entitis);
 		var navigationProperties = GlobaltypeMapper.GetNavigationProperties(_entitis);
 		var complexProperties = GlobaltypeMapper.GetComplexProperties(_entitis);
-		foreach(var property in simpleProperties)
+		
+#>  
+        public <#= _entitis.Name #> GetEntitySeed()
+        {
+            return new <#= _entitis.Name #>
+                        {
+<#+foreach(var property in simpleProperties)
         {
 #>
-		<#=codeStringGenerator.Property(property)#>
+                            <#=codeStringGenerator.Property(property)#>
 <#+
 		}
-		
-		
 		#>		
-	}
+	                    };
+        }
+        public <#= _entitis.Name.Replace("T_","").Replace("C_","")+"DTO" #> GetDTOSeed()
+        {
+            return new <#= _entitis.Name.Replace("T_","").Replace("C_","")+"DTO" #>
+                        {
+<#+foreach(var property in simpleProperties)
+        {
+#>
+                            <#=codeStringGenerator.Property(property)#>
+<#+
+		}
+		#>		
+	                    };
+        }
+    }
 }
 <#+
         return this.GenerationEnvironment.ToString();

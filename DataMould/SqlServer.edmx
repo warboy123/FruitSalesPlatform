@@ -166,11 +166,11 @@
     <Property Name="StockinID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="FruitID" Type="nvarchar(max)" Nullable="false" />
     <Property Name="count" Type="decimal" Nullable="false" />
-    <Property Name="datecreate" Type="time" Nullable="false" />
+    <Property Name="datecreate" Type="datetime" Nullable="false" />
     <Property Name="StorageID" Type="nvarchar(max)" Nullable="false" />
     <Property Name="PlaceID" Type="int" Nullable="false" />
     <Property Name="DeliverAddress" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="dateStockin" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="dateStockin" Type="datetime" Nullable="false" />
     <Property Name="status" Type="nvarchar(max)" Nullable="false" />
     <Property Name="SupplierID" Type="int" Nullable="true" />
     <Property Name="T_Fruits_FruitID" Type="int" Nullable="false" />
@@ -491,12 +491,12 @@
           <Property Type="Int32" Name="StockinID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="FruitID" Nullable="false" />
           <Property Type="Decimal" Name="count" Nullable="false" />
-          <Property Type="Time" Name="datecreate" Nullable="false" />
+          <Property Type="DateTime" Name="datecreate" Nullable="false" />
           <NavigationProperty Name="T_Fruits" Relationship="SqlServer.T_FruitsT_Warehousing" FromRole="T_Warehousing" ToRole="T_Fruits" />
           <Property Type="String" Name="StorageID" Nullable="false" />
           <Property Type="Int32" Name="PlaceID" Nullable="false" />
           <Property Type="String" Name="DeliverAddress" Nullable="false" />
-          <Property Type="String" Name="dateStockin" Nullable="false" />
+          <Property Type="DateTime" Name="dateStockin" Nullable="false" />
           <Property Type="String" Name="status" Nullable="false" />
           <Property Type="Int32" Name="SupplierID" Nullable="true" />
         </EntityType>

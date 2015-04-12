@@ -25,7 +25,7 @@
 	foreach (var entity in GlobaltypeMapper.GetItemsToGenerate<EntityType>(itemCollection))
 	{
 		EntityTemplate template = new EntityTemplate(entity);
-		string fileName = string.Format(@"{0}\{1}.cs", destPath, entity.Name.Replace("T_","").Replace("C_","")+"DTO");
+		string fileName = string.Format(@"{0}\{1}.cs", destPath, entity.Name.Replace("T_","").Replace("C_","")+"Seed");
 		template.Output.Encoding = Encoding.UTF8;
 		if(File.Exists(fileName))
 		{

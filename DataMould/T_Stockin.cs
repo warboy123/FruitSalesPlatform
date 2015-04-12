@@ -17,11 +17,11 @@ namespace DataMould
         public int StockinID { get; set; }
         public string FruitID { get; set; }
         public decimal count { get; set; }
-        public System.TimeSpan datecreate { get; set; }
+        public System.DateTime datecreate { get; set; }
         public string StorageID { get; set; }
         public int PlaceID { get; set; }
         public string DeliverAddress { get; set; }
-        public string dateStockin { get; set; }
+        public System.DateTime dateStockin { get; set; }
         public string status { get; set; }
         public Nullable<int> SupplierID { get; set; }
     

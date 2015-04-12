@@ -7,16 +7,17 @@ using System;
 using System.Collections.Generic;
 namespace DTO
 {
-	public class UserDTO
+	public class PostAddressDTO
 	{		
-		public int UserID { get; set; }
-		public string UserName { get; set; }
-		public System.DateTime Birthday { get; set; }
-		public byte Sexy { get; set; }
-		public string Email { get; set; }
-		public string LoginNum { get; set; }
-		public string PassWord { get; set; }
+		public int PostAddressID { get; set; }
+		public string Address { get; set; }
+		public bool IsDefault { get; set; }
 		public string Phone { get; set; }
+		public string ContentName { get; set; }
+		public string Tel { get; set; }
+		public string Detail { get; set; }
+		public int UserID { get; set; }
+		public int PlaceID { get; set; }
 		public bool Enabled { get; set; }
 		
 	}

@@ -7,9 +7,11 @@ using System;
 using System.Collections.Generic;
 namespace Entities
 {
-	public class T_shop
+	public class C_ProductFruits
 	{
-		public int ShopID { get; set; }
+		public int ProductFruitsID { get; set; }
+		public virtual T_Products T_Products { get; set; }
+		public virtual T_Fruits T_Fruits { get; set; }
 		
 	}
 }

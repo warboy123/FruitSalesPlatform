@@ -259,6 +259,10 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Pic\Fruits\FullPic\" />
+    <Folder Include="Pic\Fruits\ThumbPic\" />
+    <Folder Include="Pic\Products\FullPic\" />
+    <Folder Include="Pic\Products\ThumbPic\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

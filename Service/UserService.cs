@@ -35,7 +35,7 @@ namespace Service
         {
             Mapper.CreateMap<T_User,UserDTO>();
 
-            return _dal.GetEntities<T_User>(m => m.T_UserID == 1, true).Select( GetMappedSelector<T_User,UserDTO>()).ToList();                   
+            return _dal.GetEntities<T_User>(m => m.UserID == 1, true).Select( GetMappedSelector<T_User,UserDTO>()).ToList();                   
         }
 
        
@@ -68,7 +68,7 @@ namespace Service
             try
             {
                 _dal.BeginTransaction();
-                T_User UserEntity = new T_User { Birthday = DateTime.Now, UserName = user.UserName,T_UserID=user.T_UserID };
+                T_User UserEntity = new T_User { Birthday = DateTime.Now, UserName = user.UserName,UserID=user.UserID };
                 _dal.Update<T_User>(UserEntity, false);
                 _dal.CommitTransaction();
             }

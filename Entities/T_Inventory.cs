@@ -5,11 +5,15 @@
 
 using System;
 using System.Collections.Generic;
-namespace DTO
+namespace Entities
 {
-	public class shopDTO
-	{		
-		public int ShopID { get; set; }
+	public class T_Inventory
+	{
+		public int InventoryID { get; set; }
+		public int Count { get; set; }
+		public int FruitID { get; set; }
+		public int StorageID { get; set; }
+		public virtual T_Fruits T_Fruits { get; set; }
 		
 	}
 }

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 04/12/2015 17:43:52
+-- Date Created: 04/12/2015 21:23:04
 -- Generated from EDMX file: E:\work\project\Fruit\Fruilt\DataMould\SqlServer.edmx
 -- --------------------------------------------------
 
@@ -202,11 +202,11 @@ CREATE TABLE [dbo].[T_Warehousing] (
     [StockinID] int IDENTITY(1,1) NOT NULL,
     [FruitID] nvarchar(max)  NOT NULL,
     [count] decimal(18,0)  NOT NULL,
-    [datecreate] time  NOT NULL,
+    [datecreate] datetime  NOT NULL,
     [StorageID] nvarchar(max)  NOT NULL,
     [PlaceID] int  NOT NULL,
     [DeliverAddress] nvarchar(max)  NOT NULL,
-    [dateStockin] nvarchar(max)  NOT NULL,
+    [dateStockin] datetime  NOT NULL,
     [status] nvarchar(max)  NOT NULL,
     [SupplierID] int  NULL,
     [T_Fruits_FruitID] int  NOT NULL
