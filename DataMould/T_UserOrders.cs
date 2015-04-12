@@ -16,17 +16,21 @@ namespace DataMould
     {
         public T_UserOrders()
         {
+            this.Enabled = true;
             this.T_ProductOrders = new HashSet<T_ProductOrders>();
         }
     
-        public int T_UserOrdersID { get; set; }
-        public string DateCreate { get; set; }
-        public string Amount { get; set; }
-        public string SaleAmount { get; set; }
-        public string OrderStatus { get; set; }
+        public int UserOrdersID { get; set; }
+        public System.DateTime DateCreate { get; set; }
+        public decimal Amount { get; set; }
+        public decimal SaleAmount { get; set; }
+        public byte OrderStatus { get; set; }
         public string LogisticsNum { get; set; }
-        public string DatePay { get; set; }
-        public string DateConfirm { get; set; }
+        public System.DateTime DatePay { get; set; }
+        public System.DateTime DateConfirm { get; set; }
+        public int UserID { get; set; }
+        public bool Enabled { get; set; }
+        public decimal postage { get; set; }
     
         public virtual T_User T_User { get; set; }
         public virtual ICollection<T_ProductOrders> T_ProductOrders { get; set; }

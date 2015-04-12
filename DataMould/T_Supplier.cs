@@ -12,26 +12,24 @@ namespace DataMould
     using System;
     using System.Collections.Generic;
     
-    public partial class T_User
+    public partial class T_Supplier
     {
-        public T_User()
+        public T_Supplier()
         {
             this.Enabled = true;
-            this.T_PostAddress = new HashSet<T_PostAddress>();
-            this.T_UserOrders = new HashSet<T_UserOrders>();
+            this.T_SupplierFruit = new HashSet<T_SupplierFruit>();
         }
     
-        public int UserID { get; set; }
-        public string UserName { get; set; }
-        public System.DateTime Birthday { get; set; }
-        public byte Sexy { get; set; }
-        public string Email { get; set; }
-        public string LoginNum { get; set; }
-        public string PassWord { get; set; }
+        public int SupplierID { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public string Tel { get; set; }
         public string Phone { get; set; }
+        public string Contacts { get; set; }
+        public string Detail { get; set; }
         public bool Enabled { get; set; }
+        public int PlaceID { get; set; }
     
-        public virtual ICollection<T_PostAddress> T_PostAddress { get; set; }
-        public virtual ICollection<T_UserOrders> T_UserOrders { get; set; }
+        public virtual ICollection<T_SupplierFruit> T_SupplierFruit { get; set; }
     }
 }

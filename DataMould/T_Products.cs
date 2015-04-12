@@ -16,16 +16,16 @@ namespace DataMould
     {
         public T_Products()
         {
-            this.T_Fruits = new HashSet<T_Fruits>();
-            this.T_ProductOrders = new HashSet<T_ProductOrders>();
+            this.Enabled = true;
+            this.C_ProductFruitS = new HashSet<C_ProductFruits>();
         }
     
         public int ProductID { get; set; }
-        public string OriginalPrice { get; set; }
-        public string SalePrice { get; set; }
-        public string SalesVolume { get; set; }
+        public decimal OriginalPrice { get; set; }
+        public decimal SalePrice { get; set; }
+        public int SalesVolume { get; set; }
+        public bool Enabled { get; set; }
     
-        public virtual ICollection<T_Fruits> T_Fruits { get; set; }
-        public virtual ICollection<T_ProductOrders> T_ProductOrders { get; set; }
+        public virtual ICollection<C_ProductFruits> C_ProductFruitS { get; set; }
     }
 }

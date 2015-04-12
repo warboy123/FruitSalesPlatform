@@ -14,12 +14,24 @@ namespace DataMould
     
     public partial class T_Fruits
     {
+        public T_Fruits()
+        {
+            this.Enabled = true;
+            this.C_ProductFruits = new HashSet<C_ProductFruits>();
+            this.T_Warehousing = new HashSet<T_Stockin>();
+            this.T_Inventory = new HashSet<T_Inventory>();
+        }
+    
         public int FruitID { get; set; }
         public string FruitName { get; set; }
         public string HowToEat { get; set; }
         public string Detail { get; set; }
         public byte ProductSeason { get; set; }
+        public int PlaceID { get; set; }
+        public bool Enabled { get; set; }
     
-        public virtual T_Products T_Products { get; set; }
+        public virtual ICollection<C_ProductFruits> C_ProductFruits { get; set; }
+        public virtual ICollection<T_Stockin> T_Warehousing { get; set; }
+        public virtual ICollection<T_Inventory> T_Inventory { get; set; }
     }
 }

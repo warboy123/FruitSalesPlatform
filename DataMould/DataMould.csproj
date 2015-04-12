@@ -46,6 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="C_ProductFruits.cs">
+      <DependentUpon>SqlServer.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlServer.Context.cs">
       <AutoGen>True</AutoGen>
@@ -65,6 +68,9 @@
     <Compile Include="T_Fruits.cs">
       <DependentUpon>SqlServer.tt</DependentUpon>
     </Compile>
+    <Compile Include="T_Inventory.cs">
+      <DependentUpon>SqlServer.tt</DependentUpon>
+    </Compile>
     <Compile Include="T_Place.cs">
       <DependentUpon>SqlServer.tt</DependentUpon>
     </Compile>
@@ -75,6 +81,18 @@
       <DependentUpon>SqlServer.tt</DependentUpon>
     </Compile>
     <Compile Include="T_Products.cs">
+      <DependentUpon>SqlServer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T_Stockin.cs">
+      <DependentUpon>SqlServer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T_Storage.cs">
+      <DependentUpon>SqlServer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T_Supplier.cs">
+      <DependentUpon>SqlServer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T_SupplierFruit.cs">
       <DependentUpon>SqlServer.tt</DependentUpon>
     </Compile>
     <Compile Include="T_User.cs">

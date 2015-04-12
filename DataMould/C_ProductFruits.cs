@@ -12,13 +12,11 @@ namespace DataMould
     using System;
     using System.Collections.Generic;
     
-    public partial class T_ProductOrders
+    public partial class C_ProductFruits
     {
-        public int ProductOrdersID { get; set; }
-        public int Count { get; set; }
-        public int UserOrdersID { get; set; }
-        public int ProductID { get; set; }
+        public int ProductFruitsID { get; set; }
     
-        public virtual T_UserOrders T_UserOrders { get; set; }
+        public virtual T_Products T_Products { get; set; }
+        public virtual T_Fruits T_Fruits { get; set; }
     }
 }

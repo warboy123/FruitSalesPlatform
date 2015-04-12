@@ -12,17 +12,19 @@ namespace DataMould
     using System;
     using System.Collections.Generic;
     
-    public partial class T_Place
+    public partial class T_Stockin
     {
-        public T_Place()
-        {
-            this.Enabled = true;
-        }
-    
+        public int StockinID { get; set; }
+        public string FruitID { get; set; }
+        public decimal count { get; set; }
+        public System.TimeSpan datecreate { get; set; }
+        public string StorageID { get; set; }
         public int PlaceID { get; set; }
-        public string PlaceName { get; set; }
-        public string PlaceType { get; set; }
-        public int PlaceFatherID { get; set; }
-        public bool Enabled { get; set; }
+        public string DeliverAddress { get; set; }
+        public string dateStockin { get; set; }
+        public string status { get; set; }
+        public Nullable<int> SupplierID { get; set; }
+    
+        public virtual T_Fruits T_Fruits { get; set; }
     }
 }

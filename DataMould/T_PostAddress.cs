@@ -14,6 +14,11 @@ namespace DataMould
     
     public partial class T_PostAddress
     {
+        public T_PostAddress()
+        {
+            this.Enabled = true;
+        }
+    
         public int PostAddressID { get; set; }
         public string Address { get; set; }
         public bool IsDefault { get; set; }
@@ -21,6 +26,9 @@ namespace DataMould
         public string ContentName { get; set; }
         public string Tel { get; set; }
         public string Detail { get; set; }
+        public int UserID { get; set; }
+        public int PlaceID { get; set; }
+        public bool Enabled { get; set; }
     
         public virtual T_User T_User { get; set; }
     }

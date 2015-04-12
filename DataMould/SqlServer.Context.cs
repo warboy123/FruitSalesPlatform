@@ -28,9 +28,15 @@ namespace DataMould
         public DbSet<T_User> T_User { get; set; }
         public DbSet<T_Products> T_Products { get; set; }
         public DbSet<T_Fruits> T_Fruits { get; set; }
-        public DbSet<T_PostAddress> T_PostAddress { get; set; }
         public DbSet<T_UserOrders> T_ProductOrder { get; set; }
         public DbSet<T_ProductOrders> T_ProductOrders { get; set; }
         public DbSet<T_Place> T_Place { get; set; }
+        public DbSet<T_PostAddress> T_PostAddress { get; set; }
+        public DbSet<C_ProductFruits> C_ProductFruitS { get; set; }
+        public DbSet<T_Inventory> T_Inventory { get; set; }
+        public DbSet<T_Stockin> T_Warehousing { get; set; }
+        public DbSet<T_Storage> T_Storage { get; set; }
+        public DbSet<T_Supplier> T_Supplier { get; set; }
+        public DbSet<T_SupplierFruit> T_SupplierFruit { get; set; }
     }
 }

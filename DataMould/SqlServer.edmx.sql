@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 04/11/2015 23:07:14
+-- Date Created: 04/12/2015 17:43:52
 -- Generated from EDMX file: E:\work\project\Fruit\Fruilt\DataMould\SqlServer.edmx
 -- --------------------------------------------------
 
@@ -20,17 +20,26 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_T_UserT_PostAddress]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[T_PostAddress] DROP CONSTRAINT [FK_T_UserT_PostAddress];
 GO
-IF OBJECT_ID(N'[dbo].[FK_T_ProductsT_Fruits]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[T_Fruits] DROP CONSTRAINT [FK_T_ProductsT_Fruits];
-GO
 IF OBJECT_ID(N'[dbo].[FK_T_UserT_UserOrders]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[T_ProductOrder] DROP CONSTRAINT [FK_T_UserT_UserOrders];
 GO
 IF OBJECT_ID(N'[dbo].[FK_T_UserOrdersT_ProductOrders]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[T_ProductOrders] DROP CONSTRAINT [FK_T_UserOrdersT_ProductOrders];
 GO
-IF OBJECT_ID(N'[dbo].[FK_T_ProductsT_ProductOrders]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[T_ProductOrders] DROP CONSTRAINT [FK_T_ProductsT_ProductOrders];
+IF OBJECT_ID(N'[dbo].[FK_T_ProductsC_ProductFruitS]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[C_ProductFruitS] DROP CONSTRAINT [FK_T_ProductsC_ProductFruitS];
+GO
+IF OBJECT_ID(N'[dbo].[FK_T_FruitsC_ProductFruits]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[C_ProductFruitS] DROP CONSTRAINT [FK_T_FruitsC_ProductFruits];
+GO
+IF OBJECT_ID(N'[dbo].[FK_T_FruitsT_Warehousing]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[T_Warehousing] DROP CONSTRAINT [FK_T_FruitsT_Warehousing];
+GO
+IF OBJECT_ID(N'[dbo].[FK_T_FruitsT_Inventory]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[T_Inventory] DROP CONSTRAINT [FK_T_FruitsT_Inventory];
+GO
+IF OBJECT_ID(N'[dbo].[FK_T_SupplierT_SupplierFruit]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[T_SupplierFruit] DROP CONSTRAINT [FK_T_SupplierT_SupplierFruit];
 GO
 
 -- --------------------------------------------------
@@ -46,9 +55,6 @@ GO
 IF OBJECT_ID(N'[dbo].[T_Fruits]', 'U') IS NOT NULL
     DROP TABLE [dbo].[T_Fruits];
 GO
-IF OBJECT_ID(N'[dbo].[T_PostAddress]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[T_PostAddress];
-GO
 IF OBJECT_ID(N'[dbo].[T_ProductOrder]', 'U') IS NOT NULL
     DROP TABLE [dbo].[T_ProductOrder];
 GO
@@ -58,6 +64,27 @@ GO
 IF OBJECT_ID(N'[dbo].[T_Place]', 'U') IS NOT NULL
     DROP TABLE [dbo].[T_Place];
 GO
+IF OBJECT_ID(N'[dbo].[T_PostAddress]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[T_PostAddress];
+GO
+IF OBJECT_ID(N'[dbo].[C_ProductFruitS]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[C_ProductFruitS];
+GO
+IF OBJECT_ID(N'[dbo].[T_Inventory]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[T_Inventory];
+GO
+IF OBJECT_ID(N'[dbo].[T_Warehousing]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[T_Warehousing];
+GO
+IF OBJECT_ID(N'[dbo].[T_Storage]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[T_Storage];
+GO
+IF OBJECT_ID(N'[dbo].[T_Supplier]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[T_Supplier];
+GO
+IF OBJECT_ID(N'[dbo].[T_SupplierFruit]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[T_SupplierFruit];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -65,23 +92,25 @@ GO
 
 -- Creating table 'T_User'
 CREATE TABLE [dbo].[T_User] (
-    [T_UserID] int IDENTITY(1,1) NOT NULL,
+    [UserID] int IDENTITY(1,1) NOT NULL,
     [UserName] nvarchar(100)  NOT NULL,
     [Birthday] datetime  NOT NULL,
     [Sexy] tinyint  NOT NULL,
     [Email] nvarchar(100)  NOT NULL,
     [LoginNum] nvarchar(50)  NOT NULL,
     [PassWord] nvarchar(100)  NOT NULL,
-    [Phone] nvarchar(50)  NOT NULL
+    [Phone] nvarchar(50)  NULL,
+    [Enabled] bit  NOT NULL
 );
 GO
 
 -- Creating table 'T_Products'
 CREATE TABLE [dbo].[T_Products] (
     [ProductID] int IDENTITY(1,1) NOT NULL,
-    [OriginalPrice] nvarchar(max)  NOT NULL,
-    [SalePrice] nvarchar(max)  NOT NULL,
-    [SalesVolume] nvarchar(max)  NOT NULL
+    [OriginalPrice] decimal(18,0)  NOT NULL,
+    [SalePrice] decimal(18,0)  NOT NULL,
+    [SalesVolume] int  NOT NULL,
+    [Enabled] bit  NOT NULL
 );
 GO
 
@@ -89,55 +118,130 @@ GO
 CREATE TABLE [dbo].[T_Fruits] (
     [FruitID] int IDENTITY(1,1) NOT NULL,
     [FruitName] nvarchar(200)  NOT NULL,
-    [HowToEat] nvarchar(200)  NOT NULL,
-    [Detail] nvarchar(max)  NOT NULL,
+    [HowToEat] nvarchar(200)  NULL,
+    [Detail] nvarchar(max)  NULL,
     [ProductSeason] tinyint  NOT NULL,
-    [T_Products_ProductID] int  NOT NULL
+    [PlaceID] int  NOT NULL,
+    [Enabled] bit  NOT NULL
+);
+GO
+
+-- Creating table 'T_ProductOrder'
+CREATE TABLE [dbo].[T_ProductOrder] (
+    [UserOrdersID] int IDENTITY(1,1) NOT NULL,
+    [DateCreate] datetime  NOT NULL,
+    [Amount] decimal(18,0)  NOT NULL,
+    [SaleAmount] decimal(18,0)  NOT NULL,
+    [OrderStatus] tinyint  NOT NULL,
+    [LogisticsNum] nvarchar(max)  NOT NULL,
+    [DatePay] datetime  NOT NULL,
+    [DateConfirm] datetime  NOT NULL,
+    [UserID] int  NOT NULL,
+    [Enabled] bit  NOT NULL,
+    [postage] decimal(18,0)  NOT NULL,
+    [T_User_UserID] int  NOT NULL
+);
+GO
+
+-- Creating table 'T_ProductOrders'
+CREATE TABLE [dbo].[T_ProductOrders] (
+    [ProductOrdersID] int IDENTITY(1,1) NOT NULL,
+    [Count] int  NOT NULL,
+    [UserOrdersID] int  NOT NULL,
+    [ProductID] int  NOT NULL,
+    [T_UserOrders_UserOrdersID] int  NOT NULL
+);
+GO
+
+-- Creating table 'T_Place'
+CREATE TABLE [dbo].[T_Place] (
+    [PlaceID] int IDENTITY(1,1) NOT NULL,
+    [PlaceName] nvarchar(200)  NOT NULL,
+    [PlaceType] nvarchar(max)  NOT NULL,
+    [PlaceFatherID] int  NOT NULL,
+    [Enabled] bit  NOT NULL
 );
 GO
 
 -- Creating table 'T_PostAddress'
 CREATE TABLE [dbo].[T_PostAddress] (
     [PostAddressID] int IDENTITY(1,1) NOT NULL,
-    [Address] nvarchar(300)  NOT NULL,
+    [Address] nvarchar(300)  NULL,
     [IsDefault] bit  NOT NULL,
     [Phone] nvarchar(50)  NOT NULL,
     [ContentName] nvarchar(50)  NOT NULL,
     [Tel] nvarchar(50)  NOT NULL,
-    [Detail] nvarchar(500)  NOT NULL,
-    [T_User_T_UserID] int  NOT NULL
+    [Detail] nvarchar(500)  NULL,
+    [UserID] int  NOT NULL,
+    [PlaceID] int  NOT NULL,
+    [Enabled] bit  NOT NULL,
+    [T_User_UserID] int  NOT NULL
 );
 GO
 
--- Creating table 'T_ProductOrder'
-CREATE TABLE [dbo].[T_ProductOrder] (
-    [T_UserOrdersID] int IDENTITY(1,1) NOT NULL,
-    [DateCreate] nvarchar(max)  NOT NULL,
-    [Amount] nvarchar(max)  NOT NULL,
-    [SaleAmount] nvarchar(max)  NOT NULL,
-    [OrderStatus] nvarchar(max)  NOT NULL,
-    [LogisticsNum] nvarchar(max)  NOT NULL,
-    [DatePay] nvarchar(max)  NOT NULL,
-    [DateConfirm] nvarchar(max)  NOT NULL,
-    [T_User_T_UserID] int  NOT NULL
+-- Creating table 'C_ProductFruitS'
+CREATE TABLE [dbo].[C_ProductFruitS] (
+    [ProductFruitsID] int IDENTITY(1,1) NOT NULL,
+    [T_Products_ProductID] int  NOT NULL,
+    [T_Fruits_FruitID] int  NOT NULL
 );
 GO
 
--- Creating table 'T_ProductOrders'
-CREATE TABLE [dbo].[T_ProductOrders] (
-    [T_ProductOrdersID] int IDENTITY(1,1) NOT NULL,
-    [count] int  NOT NULL,
-    [T_UserOrders_T_UserOrdersID] int  NOT NULL,
-    [T_Products_ProductID] int  NOT NULL
+-- Creating table 'T_Inventory'
+CREATE TABLE [dbo].[T_Inventory] (
+    [InventoryID] int IDENTITY(1,1) NOT NULL,
+    [Count] int  NOT NULL,
+    [FruitID] int  NOT NULL,
+    [StorageID] int  NOT NULL,
+    [T_Fruits_FruitID] int  NOT NULL
 );
 GO
 
--- Creating table 'T_Place'
-CREATE TABLE [dbo].[T_Place] (
-    [T_PlaceID] int IDENTITY(1,1) NOT NULL,
-    [PlaceName] nvarchar(200)  NOT NULL,
-    [PlaceType] int  NOT NULL,
-    [PlaceFatherID] int  NOT NULL
+-- Creating table 'T_Warehousing'
+CREATE TABLE [dbo].[T_Warehousing] (
+    [StockinID] int IDENTITY(1,1) NOT NULL,
+    [FruitID] nvarchar(max)  NOT NULL,
+    [count] decimal(18,0)  NOT NULL,
+    [datecreate] time  NOT NULL,
+    [StorageID] nvarchar(max)  NOT NULL,
+    [PlaceID] int  NOT NULL,
+    [DeliverAddress] nvarchar(max)  NOT NULL,
+    [dateStockin] nvarchar(max)  NOT NULL,
+    [status] nvarchar(max)  NOT NULL,
+    [SupplierID] int  NULL,
+    [T_Fruits_FruitID] int  NOT NULL
+);
+GO
+
+-- Creating table 'T_Storage'
+CREATE TABLE [dbo].[T_Storage] (
+    [StorageID] int IDENTITY(1,1) NOT NULL,
+    [PlaceID] int  NOT NULL,
+    [Address] nvarchar(500)  NULL,
+    [Enabled] bit  NOT NULL
+);
+GO
+
+-- Creating table 'T_Supplier'
+CREATE TABLE [dbo].[T_Supplier] (
+    [SupplierID] int IDENTITY(1,1) NOT NULL,
+    [Name] nvarchar(200)  NOT NULL,
+    [Address] nvarchar(500)  NULL,
+    [Tel] nvarchar(50)  NULL,
+    [Phone] nvarchar(50)  NOT NULL,
+    [Contacts] nvarchar(50)  NOT NULL,
+    [Detail] nvarchar(500)  NULL,
+    [Enabled] bit  NOT NULL,
+    [PlaceID] int  NOT NULL
+);
+GO
+
+-- Creating table 'T_SupplierFruit'
+CREATE TABLE [dbo].[T_SupplierFruit] (
+    [SupplierFruitID] int IDENTITY(1,1) NOT NULL,
+    [FruitID] int  NOT NULL,
+    [Enabled] bit  NOT NULL,
+    [T_Supplier_SupplierID] int  NOT NULL
 );
 GO
 
@@ -145,10 +249,10 @@ GO
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
 
--- Creating primary key on [T_UserID] in table 'T_User'
+-- Creating primary key on [UserID] in table 'T_User'
 ALTER TABLE [dbo].[T_User]
 ADD CONSTRAINT [PK_T_User]
-    PRIMARY KEY CLUSTERED ([T_UserID] ASC);
+    PRIMARY KEY CLUSTERED ([UserID] ASC);
 GO
 
 -- Creating primary key on [ProductID] in table 'T_Products'
@@ -163,102 +267,180 @@ ADD CONSTRAINT [PK_T_Fruits]
     PRIMARY KEY CLUSTERED ([FruitID] ASC);
 GO
 
+-- Creating primary key on [UserOrdersID] in table 'T_ProductOrder'
+ALTER TABLE [dbo].[T_ProductOrder]
+ADD CONSTRAINT [PK_T_ProductOrder]
+    PRIMARY KEY CLUSTERED ([UserOrdersID] ASC);
+GO
+
+-- Creating primary key on [ProductOrdersID] in table 'T_ProductOrders'
+ALTER TABLE [dbo].[T_ProductOrders]
+ADD CONSTRAINT [PK_T_ProductOrders]
+    PRIMARY KEY CLUSTERED ([ProductOrdersID] ASC);
+GO
+
+-- Creating primary key on [PlaceID] in table 'T_Place'
+ALTER TABLE [dbo].[T_Place]
+ADD CONSTRAINT [PK_T_Place]
+    PRIMARY KEY CLUSTERED ([PlaceID] ASC);
+GO
+
 -- Creating primary key on [PostAddressID] in table 'T_PostAddress'
 ALTER TABLE [dbo].[T_PostAddress]
 ADD CONSTRAINT [PK_T_PostAddress]
     PRIMARY KEY CLUSTERED ([PostAddressID] ASC);
 GO
 
--- Creating primary key on [T_UserOrdersID] in table 'T_ProductOrder'
-ALTER TABLE [dbo].[T_ProductOrder]
-ADD CONSTRAINT [PK_T_ProductOrder]
-    PRIMARY KEY CLUSTERED ([T_UserOrdersID] ASC);
+-- Creating primary key on [ProductFruitsID] in table 'C_ProductFruitS'
+ALTER TABLE [dbo].[C_ProductFruitS]
+ADD CONSTRAINT [PK_C_ProductFruitS]
+    PRIMARY KEY CLUSTERED ([ProductFruitsID] ASC);
 GO
 
--- Creating primary key on [T_ProductOrdersID] in table 'T_ProductOrders'
-ALTER TABLE [dbo].[T_ProductOrders]
-ADD CONSTRAINT [PK_T_ProductOrders]
-    PRIMARY KEY CLUSTERED ([T_ProductOrdersID] ASC);
+-- Creating primary key on [InventoryID] in table 'T_Inventory'
+ALTER TABLE [dbo].[T_Inventory]
+ADD CONSTRAINT [PK_T_Inventory]
+    PRIMARY KEY CLUSTERED ([InventoryID] ASC);
 GO
 
--- Creating primary key on [T_PlaceID] in table 'T_Place'
-ALTER TABLE [dbo].[T_Place]
-ADD CONSTRAINT [PK_T_Place]
-    PRIMARY KEY CLUSTERED ([T_PlaceID] ASC);
+-- Creating primary key on [StockinID] in table 'T_Warehousing'
+ALTER TABLE [dbo].[T_Warehousing]
+ADD CONSTRAINT [PK_T_Warehousing]
+    PRIMARY KEY CLUSTERED ([StockinID] ASC);
+GO
+
+-- Creating primary key on [StorageID] in table 'T_Storage'
+ALTER TABLE [dbo].[T_Storage]
+ADD CONSTRAINT [PK_T_Storage]
+    PRIMARY KEY CLUSTERED ([StorageID] ASC);
+GO
+
+-- Creating primary key on [SupplierID] in table 'T_Supplier'
+ALTER TABLE [dbo].[T_Supplier]
+ADD CONSTRAINT [PK_T_Supplier]
+    PRIMARY KEY CLUSTERED ([SupplierID] ASC);
+GO
+
+-- Creating primary key on [SupplierFruitID] in table 'T_SupplierFruit'
+ALTER TABLE [dbo].[T_SupplierFruit]
+ADD CONSTRAINT [PK_T_SupplierFruit]
+    PRIMARY KEY CLUSTERED ([SupplierFruitID] ASC);
 GO
 
 -- --------------------------------------------------
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
 
--- Creating foreign key on [T_User_T_UserID] in table 'T_PostAddress'
+-- Creating foreign key on [T_User_UserID] in table 'T_PostAddress'
 ALTER TABLE [dbo].[T_PostAddress]
 ADD CONSTRAINT [FK_T_UserT_PostAddress]
-    FOREIGN KEY ([T_User_T_UserID])
+    FOREIGN KEY ([T_User_UserID])
     REFERENCES [dbo].[T_User]
-        ([T_UserID])
+        ([UserID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_T_UserT_PostAddress'
 CREATE INDEX [IX_FK_T_UserT_PostAddress]
 ON [dbo].[T_PostAddress]
-    ([T_User_T_UserID]);
+    ([T_User_UserID]);
 GO
 
--- Creating foreign key on [T_Products_ProductID] in table 'T_Fruits'
-ALTER TABLE [dbo].[T_Fruits]
-ADD CONSTRAINT [FK_T_ProductsT_Fruits]
-    FOREIGN KEY ([T_Products_ProductID])
-    REFERENCES [dbo].[T_Products]
-        ([ProductID])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_T_ProductsT_Fruits'
-CREATE INDEX [IX_FK_T_ProductsT_Fruits]
-ON [dbo].[T_Fruits]
-    ([T_Products_ProductID]);
-GO
-
--- Creating foreign key on [T_User_T_UserID] in table 'T_ProductOrder'
+-- Creating foreign key on [T_User_UserID] in table 'T_ProductOrder'
 ALTER TABLE [dbo].[T_ProductOrder]
 ADD CONSTRAINT [FK_T_UserT_UserOrders]
-    FOREIGN KEY ([T_User_T_UserID])
+    FOREIGN KEY ([T_User_UserID])
     REFERENCES [dbo].[T_User]
-        ([T_UserID])
+        ([UserID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_T_UserT_UserOrders'
 CREATE INDEX [IX_FK_T_UserT_UserOrders]
 ON [dbo].[T_ProductOrder]
-    ([T_User_T_UserID]);
+    ([T_User_UserID]);
 GO
 
--- Creating foreign key on [T_UserOrders_T_UserOrdersID] in table 'T_ProductOrders'
+-- Creating foreign key on [T_UserOrders_UserOrdersID] in table 'T_ProductOrders'
 ALTER TABLE [dbo].[T_ProductOrders]
 ADD CONSTRAINT [FK_T_UserOrdersT_ProductOrders]
-    FOREIGN KEY ([T_UserOrders_T_UserOrdersID])
+    FOREIGN KEY ([T_UserOrders_UserOrdersID])
     REFERENCES [dbo].[T_ProductOrder]
-        ([T_UserOrdersID])
+        ([UserOrdersID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_T_UserOrdersT_ProductOrders'
 CREATE INDEX [IX_FK_T_UserOrdersT_ProductOrders]
 ON [dbo].[T_ProductOrders]
-    ([T_UserOrders_T_UserOrdersID]);
+    ([T_UserOrders_UserOrdersID]);
 GO
 
--- Creating foreign key on [T_Products_ProductID] in table 'T_ProductOrders'
-ALTER TABLE [dbo].[T_ProductOrders]
-ADD CONSTRAINT [FK_T_ProductsT_ProductOrders]
+-- Creating foreign key on [T_Products_ProductID] in table 'C_ProductFruitS'
+ALTER TABLE [dbo].[C_ProductFruitS]
+ADD CONSTRAINT [FK_T_ProductsC_ProductFruitS]
     FOREIGN KEY ([T_Products_ProductID])
     REFERENCES [dbo].[T_Products]
         ([ProductID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- Creating non-clustered index for FOREIGN KEY 'FK_T_ProductsT_ProductOrders'
-CREATE INDEX [IX_FK_T_ProductsT_ProductOrders]
-ON [dbo].[T_ProductOrders]
+-- Creating non-clustered index for FOREIGN KEY 'FK_T_ProductsC_ProductFruitS'
+CREATE INDEX [IX_FK_T_ProductsC_ProductFruitS]
+ON [dbo].[C_ProductFruitS]
     ([T_Products_ProductID]);
+GO
+
+-- Creating foreign key on [T_Fruits_FruitID] in table 'C_ProductFruitS'
+ALTER TABLE [dbo].[C_ProductFruitS]
+ADD CONSTRAINT [FK_T_FruitsC_ProductFruits]
+    FOREIGN KEY ([T_Fruits_FruitID])
+    REFERENCES [dbo].[T_Fruits]
+        ([FruitID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_T_FruitsC_ProductFruits'
+CREATE INDEX [IX_FK_T_FruitsC_ProductFruits]
+ON [dbo].[C_ProductFruitS]
+    ([T_Fruits_FruitID]);
+GO
+
+-- Creating foreign key on [T_Fruits_FruitID] in table 'T_Warehousing'
+ALTER TABLE [dbo].[T_Warehousing]
+ADD CONSTRAINT [FK_T_FruitsT_Warehousing]
+    FOREIGN KEY ([T_Fruits_FruitID])
+    REFERENCES [dbo].[T_Fruits]
+        ([FruitID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_T_FruitsT_Warehousing'
+CREATE INDEX [IX_FK_T_FruitsT_Warehousing]
+ON [dbo].[T_Warehousing]
+    ([T_Fruits_FruitID]);
+GO
+
+-- Creating foreign key on [T_Fruits_FruitID] in table 'T_Inventory'
+ALTER TABLE [dbo].[T_Inventory]
+ADD CONSTRAINT [FK_T_FruitsT_Inventory]
+    FOREIGN KEY ([T_Fruits_FruitID])
+    REFERENCES [dbo].[T_Fruits]
+        ([FruitID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_T_FruitsT_Inventory'
+CREATE INDEX [IX_FK_T_FruitsT_Inventory]
+ON [dbo].[T_Inventory]
+    ([T_Fruits_FruitID]);
+GO
+
+-- Creating foreign key on [T_Supplier_SupplierID] in table 'T_SupplierFruit'
+ALTER TABLE [dbo].[T_SupplierFruit]
+ADD CONSTRAINT [FK_T_SupplierT_SupplierFruit]
+    FOREIGN KEY ([T_Supplier_SupplierID])
+    REFERENCES [dbo].[T_Supplier]
+        ([SupplierID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_T_SupplierT_SupplierFruit'
+CREATE INDEX [IX_FK_T_SupplierT_SupplierFruit]
+ON [dbo].[T_SupplierFruit]
+    ([T_Supplier_SupplierID]);
 GO
 
 -- --------------------------------------------------
