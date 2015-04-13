@@ -25,13 +25,17 @@ public class CodeStringGenerator
             string defaultValue="";
             switch(PropertyType)
             {
-                case "int":defaultValue="0";
+                case "int":defaultValue="RandomData.GetRandomInt(1,100)";
                     break;
                 case "string":defaultValue="\"\"";
+                    if(_code.Escape(edmProperty).IndexOf("UserName")>=0)
+                    {
+                        defaultValue="RandomData.GetRandomName()";
+                    }
                     break;
                 case "bool":defaultValue="true";
                     break;
-                case "System.DateTime":defaultValue="DateTime.Now";
+                case "System.DateTime":defaultValue="RandomData.GetRadomTime()";
                     break;
                 case "decimal":defaultValue="0";
                     break;

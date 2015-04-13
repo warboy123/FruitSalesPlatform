@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using Entities;
 using DTO;
+using Common;
 namespace DataSeeds
 {
 	public class UserOrdersSeed
@@ -16,15 +17,15 @@ namespace DataSeeds
         {
             return new T_UserOrders
                         {
-                            UserOrdersID=0,
-                            DateCreate=DateTime.Now,
+                            UserOrdersID=RandomData.GetRandomInt(1,100),
+                            DateCreate=RandomData.GetRadomTime(),
                             Amount=0,
                             SaleAmount=0,
                             OrderStatus=0,
                             LogisticsNum="",
-                            DatePay=DateTime.Now,
-                            DateConfirm=DateTime.Now,
-                            UserID=0,
+                            DatePay=RandomData.GetRadomTime(),
+                            DateConfirm=RandomData.GetRadomTime(),
+                            UserID=RandomData.GetRandomInt(1,100),
                             Enabled=true,
                             postage=0,
 		
@@ -34,15 +35,15 @@ namespace DataSeeds
         {
             return new UserOrdersDTO
                         {
-                            UserOrdersID=0,
-                            DateCreate=DateTime.Now,
+                            UserOrdersID=RandomData.GetRandomInt(1,100),
+                            DateCreate=RandomData.GetRadomTime(),
                             Amount=0,
                             SaleAmount=0,
                             OrderStatus=0,
                             LogisticsNum="",
-                            DatePay=DateTime.Now,
-                            DateConfirm=DateTime.Now,
-                            UserID=0,
+                            DatePay=RandomData.GetRadomTime(),
+                            DateConfirm=RandomData.GetRadomTime(),
+                            UserID=RandomData.GetRandomInt(1,100),
                             Enabled=true,
                             postage=0,
 		

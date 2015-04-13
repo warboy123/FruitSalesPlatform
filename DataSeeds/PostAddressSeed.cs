@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using Entities;
 using DTO;
+using Common;
 namespace DataSeeds
 {
 	public class PostAddressSeed
@@ -16,15 +17,15 @@ namespace DataSeeds
         {
             return new T_PostAddress
                         {
-                            PostAddressID=0,
+                            PostAddressID=RandomData.GetRandomInt(1,100),
                             Address="",
                             IsDefault=true,
                             Phone="",
                             ContentName="",
                             Tel="",
                             Detail="",
-                            UserID=0,
-                            PlaceID=0,
+                            UserID=RandomData.GetRandomInt(1,100),
+                            PlaceID=RandomData.GetRandomInt(1,100),
                             Enabled=true,
 		
 	                    };
@@ -33,15 +34,15 @@ namespace DataSeeds
         {
             return new PostAddressDTO
                         {
-                            PostAddressID=0,
+                            PostAddressID=RandomData.GetRandomInt(1,100),
                             Address="",
                             IsDefault=true,
                             Phone="",
                             ContentName="",
                             Tel="",
                             Detail="",
-                            UserID=0,
-                            PlaceID=0,
+                            UserID=RandomData.GetRandomInt(1,100),
+                            PlaceID=RandomData.GetRandomInt(1,100),
                             Enabled=true,
 		
 	                    };

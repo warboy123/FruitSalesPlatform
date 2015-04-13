@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using Entities;
 using DTO;
+using Common;
 namespace DataSeeds
 {
 	public class ProductsSeed
@@ -16,10 +17,10 @@ namespace DataSeeds
         {
             return new T_Products
                         {
-                            ProductID=0,
+                            ProductID=RandomData.GetRandomInt(1,100),
                             OriginalPrice=0,
                             SalePrice=0,
-                            SalesVolume=0,
+                            SalesVolume=RandomData.GetRandomInt(1,100),
                             Enabled=true,
 		
 	                    };
@@ -28,10 +29,10 @@ namespace DataSeeds
         {
             return new ProductsDTO
                         {
-                            ProductID=0,
+                            ProductID=RandomData.GetRandomInt(1,100),
                             OriginalPrice=0,
                             SalePrice=0,
-                            SalesVolume=0,
+                            SalesVolume=RandomData.GetRandomInt(1,100),
                             Enabled=true,
 		
 	                    };

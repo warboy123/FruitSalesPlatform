@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using Entities;
 using DTO;
+using Common;
 namespace DataSeeds
 {
 	public class SupplierSeed
@@ -16,7 +17,7 @@ namespace DataSeeds
         {
             return new T_Supplier
                         {
-                            SupplierID=0,
+                            SupplierID=RandomData.GetRandomInt(1,100),
                             Name="",
                             Address="",
                             Tel="",
@@ -24,7 +25,7 @@ namespace DataSeeds
                             Contacts="",
                             Detail="",
                             Enabled=true,
-                            PlaceID=0,
+                            PlaceID=RandomData.GetRandomInt(1,100),
 		
 	                    };
         }
@@ -32,7 +33,7 @@ namespace DataSeeds
         {
             return new SupplierDTO
                         {
-                            SupplierID=0,
+                            SupplierID=RandomData.GetRandomInt(1,100),
                             Name="",
                             Address="",
                             Tel="",
@@ -40,7 +41,7 @@ namespace DataSeeds
                             Contacts="",
                             Detail="",
                             Enabled=true,
-                            PlaceID=0,
+                            PlaceID=RandomData.GetRandomInt(1,100),
 		
 	                    };
         }

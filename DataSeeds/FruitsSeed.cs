@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using Entities;
 using DTO;
+using Common;
 namespace DataSeeds
 {
 	public class FruitsSeed
@@ -16,12 +17,12 @@ namespace DataSeeds
         {
             return new T_Fruits
                         {
-                            FruitID=0,
+                            FruitID=RandomData.GetRandomInt(1,100),
                             FruitName="",
                             HowToEat="",
                             Detail="",
                             ProductSeason=0,
-                            PlaceID=0,
+                            PlaceID=RandomData.GetRandomInt(1,100),
                             Enabled=true,
 		
 	                    };
@@ -30,12 +31,12 @@ namespace DataSeeds
         {
             return new FruitsDTO
                         {
-                            FruitID=0,
+                            FruitID=RandomData.GetRandomInt(1,100),
                             FruitName="",
                             HowToEat="",
                             Detail="",
                             ProductSeason=0,
-                            PlaceID=0,
+                            PlaceID=RandomData.GetRandomInt(1,100),
                             Enabled=true,
 		
 	                    };

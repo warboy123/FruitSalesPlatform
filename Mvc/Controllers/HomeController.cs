@@ -7,6 +7,7 @@ using IService;
 using Entities;
 using DTO;
 using Mvc.App_Start;
+using Common;
 namespace Mvc.Controllers
 {
     public class HomeController : Controller
@@ -33,6 +34,7 @@ namespace Mvc.Controllers
             {
                 IUser.Update(userList.First());
             }
+            string randomName = RandomData.GetRandomName();
             return View(new HomeModel { UserList =userList});
         }
         public JsonResult GetUser(string ID)

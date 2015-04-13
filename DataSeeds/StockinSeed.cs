@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using Entities;
 using DTO;
+using Common;
 namespace DataSeeds
 {
 	public class StockinSeed
@@ -16,14 +17,14 @@ namespace DataSeeds
         {
             return new T_Stockin
                         {
-                            StockinID=0,
+                            StockinID=RandomData.GetRandomInt(1,100),
                             FruitID="",
                             count=0,
-                            datecreate=DateTime.Now,
+                            datecreate=RandomData.GetRadomTime(),
                             StorageID="",
-                            PlaceID=0,
+                            PlaceID=RandomData.GetRandomInt(1,100),
                             DeliverAddress="",
-                            dateStockin=DateTime.Now,
+                            dateStockin=RandomData.GetRadomTime(),
                             status="",
                             SupplierID=null,
 		
@@ -33,14 +34,14 @@ namespace DataSeeds
         {
             return new StockinDTO
                         {
-                            StockinID=0,
+                            StockinID=RandomData.GetRandomInt(1,100),
                             FruitID="",
                             count=0,
-                            datecreate=DateTime.Now,
+                            datecreate=RandomData.GetRadomTime(),
                             StorageID="",
-                            PlaceID=0,
+                            PlaceID=RandomData.GetRandomInt(1,100),
                             DeliverAddress="",
-                            dateStockin=DateTime.Now,
+                            dateStockin=RandomData.GetRadomTime(),
                             status="",
                             SupplierID=null,
 		

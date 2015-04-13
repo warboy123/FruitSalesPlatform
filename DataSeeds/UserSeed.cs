@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using Entities;
 using DTO;
+using Common;
 namespace DataSeeds
 {
 	public class UserSeed
@@ -16,9 +17,9 @@ namespace DataSeeds
         {
             return new T_User
                         {
-                            UserID=0,
-                            UserName="",
-                            Birthday=DateTime.Now,
+                            UserID=RandomData.GetRandomInt(1,100),
+                            UserName=RandomData.GetRandomName(),
+                            Birthday=RandomData.GetRadomTime(),
                             Sex=0,
                             Email="",
                             LoginNum="",
@@ -32,9 +33,9 @@ namespace DataSeeds
         {
             return new UserDTO
                         {
-                            UserID=0,
-                            UserName="",
-                            Birthday=DateTime.Now,
+                            UserID=RandomData.GetRandomInt(1,100),
+                            UserName=RandomData.GetRandomName(),
+                            Birthday=RandomData.GetRadomTime(),
                             Sex=0,
                             Email="",
                             LoginNum="",

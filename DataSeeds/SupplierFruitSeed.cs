@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using Entities;
 using DTO;
+using Common;
 namespace DataSeeds
 {
 	public class SupplierFruitSeed
@@ -16,8 +17,8 @@ namespace DataSeeds
         {
             return new T_SupplierFruit
                         {
-                            SupplierFruitID=0,
-                            FruitID=0,
+                            SupplierFruitID=RandomData.GetRandomInt(1,100),
+                            FruitID=RandomData.GetRandomInt(1,100),
                             Enabled=true,
 		
 	                    };
@@ -26,8 +27,8 @@ namespace DataSeeds
         {
             return new SupplierFruitDTO
                         {
-                            SupplierFruitID=0,
-                            FruitID=0,
+                            SupplierFruitID=RandomData.GetRandomInt(1,100),
+                            FruitID=RandomData.GetRandomInt(1,100),
                             Enabled=true,
 		
 	                    };

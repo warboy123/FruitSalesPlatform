@@ -98,6 +98,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{8dfac289-15d2-4619-a45d-e926ce4280a2}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DTO\DTO.csproj">
       <Project>{1b7ff698-9ca9-4ff7-bad9-ccd6136397c2}</Project>
       <Name>DTO</Name>

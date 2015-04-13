@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using Entities;
 using DTO;
+using Common;
 namespace DataSeeds
 {
 	public class <#= _entitis.Name.Replace("T_","").Replace("C_","")+"Seed" #>

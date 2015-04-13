@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using Entities;
 using DTO;
+using Common;
 namespace DataSeeds
 {
 	public class StorageSeed
@@ -16,8 +17,8 @@ namespace DataSeeds
         {
             return new T_Storage
                         {
-                            StorageID=0,
-                            PlaceID=0,
+                            StorageID=RandomData.GetRandomInt(1,100),
+                            PlaceID=RandomData.GetRandomInt(1,100),
                             Address="",
                             Enabled=true,
 		
@@ -27,8 +28,8 @@ namespace DataSeeds
         {
             return new StorageDTO
                         {
-                            StorageID=0,
-                            PlaceID=0,
+                            StorageID=RandomData.GetRandomInt(1,100),
+                            PlaceID=RandomData.GetRandomInt(1,100),
                             Address="",
                             Enabled=true,
 		

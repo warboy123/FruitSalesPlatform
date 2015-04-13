@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using Entities;
 using DTO;
+using Common;
 namespace DataSeeds
 {
 	public class InventorySeed
@@ -16,10 +17,10 @@ namespace DataSeeds
         {
             return new T_Inventory
                         {
-                            InventoryID=0,
-                            Count=0,
-                            FruitID=0,
-                            StorageID=0,
+                            InventoryID=RandomData.GetRandomInt(1,100),
+                            Count=RandomData.GetRandomInt(1,100),
+                            FruitID=RandomData.GetRandomInt(1,100),
+                            StorageID=RandomData.GetRandomInt(1,100),
 		
 	                    };
         }
@@ -27,10 +28,10 @@ namespace DataSeeds
         {
             return new InventoryDTO
                         {
-                            InventoryID=0,
-                            Count=0,
-                            FruitID=0,
-                            StorageID=0,
+                            InventoryID=RandomData.GetRandomInt(1,100),
+                            Count=RandomData.GetRandomInt(1,100),
+                            FruitID=RandomData.GetRandomInt(1,100),
+                            StorageID=RandomData.GetRandomInt(1,100),
 		
 	                    };
         }
