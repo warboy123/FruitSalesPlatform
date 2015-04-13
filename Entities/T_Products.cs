@@ -7,6 +7,9 @@ using System;
 using System.Collections.Generic;
 namespace Entities
 {
+    /// <summary>
+    /// T_Products
+    /// </summary>
 	public class T_Products
 	{
 		public T_Products()
@@ -14,11 +17,30 @@ namespace Entities
 			this.Enabled = true;
 			this.C_ProductFruitS = new HashSet<C_ProductFruits>();
 		}		
+        /// <summary>
+        /// 
+        /// </summary>
 		public int ProductID { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public decimal OriginalPrice { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public decimal SalePrice { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public int SalesVolume { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public bool Enabled { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+
 		public virtual ICollection<C_ProductFruits> C_ProductFruitS { get; set; }
 		
 	}

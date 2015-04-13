@@ -59,7 +59,7 @@
     <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="100" />
     <Property Name="Birthday" Type="datetime" Nullable="false" />
-    <Property Name="Sexy" Type="tinyint" Nullable="false" />
+    <Property Name="Sex" Type="tinyint" Nullable="false" />
     <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="100" />
     <Property Name="LoginNum" Type="nvarchar" Nullable="false" MaxLength="50" />
     <Property Name="PassWord" Type="nvarchar" Nullable="false" MaxLength="100" />
@@ -355,20 +355,69 @@
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="T_User">
+          <Documentation>
+            <Summary>用户</Summary>
+            <LongDescription>用户实体</LongDescription>
+          </Documentation>
           <Key>
             <PropertyRef Name="UserID" />
           </Key>
-          <Property Type="Int32" Name="UserID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="UserName" Nullable="false" MaxLength="100" />
-          <Property Type="DateTime" Name="Birthday" Nullable="false" />
-          <Property Type="Byte" Name="Sexy" Nullable="false" />
-          <Property Type="String" Name="Email" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="LoginNum" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="PassWord" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="Phone" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="UserID" Nullable="false" annotation:StoreGeneratedPattern="Identity" >
+            <Documentation>
+              <Summary>用户ID</Summary>
+              <LongDescription>用户ID</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="100" >
+            <Documentation>
+              <Summary>名称</Summary>
+              <LongDescription>用户名称</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="DateTime" Name="Birthday" Nullable="false" >
+            <Documentation>
+              <Summary>生日</Summary>
+              <LongDescription>生日</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="Byte" Name="Sex" Nullable="false" >
+            <Documentation>
+              <Summary>性别</Summary>
+              <LongDescription>性别</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="100" >
+            <Documentation>
+              <Summary>邮箱</Summary>
+              <LongDescription>邮箱</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="LoginNum" Nullable="false" MaxLength="50" >
+            <Documentation>
+              <Summary>账号</Summary>
+              <LongDescription>登陆账号</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="PassWord" Nullable="false" MaxLength="100" >
+            <Documentation>
+              <Summary>密码</Summary>
+              <LongDescription>登陆密码</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="50" >
+            <Documentation>
+              <Summary>电话</Summary>
+              <LongDescription>手机或者固定电话</LongDescription>
+            </Documentation>
+          </Property>
           <NavigationProperty Name="T_PostAddress" Relationship="SqlServer.T_UserT_PostAddress" FromRole="T_User" ToRole="T_PostAddress" />
           <NavigationProperty Name="T_UserOrders" Relationship="SqlServer.T_UserT_UserOrders" FromRole="T_User" ToRole="T_UserOrders" />
-          <Property Type="Boolean" Name="Enabled" Nullable="false" DefaultValue="true" />
+          <Property Type="Boolean" Name="Enabled" Nullable="false" DefaultValue="true" >
+            <Documentation>
+              <Summary>有效</Summary>
+              <LongDescription>是否有效</LongDescription>
+            </Documentation>
+          </Property>
         </EntityType>
         <EntityType Name="T_Products">
           <Key>
@@ -397,6 +446,10 @@
           <NavigationProperty Name="T_Inventory" Relationship="SqlServer.T_FruitsT_Inventory" FromRole="T_Fruits" ToRole="T_Inventory" />
         </EntityType>
         <EntityType Name="T_PostAddress">
+          <Documentation>
+            <Summary>地址</Summary>
+            <LongDescription>地址实体</LongDescription>
+          </Documentation>
           <Key>
             <PropertyRef Name="PostAddressID" />
           </Key>
@@ -561,7 +614,7 @@
           <ScalarProperty Name="UserID" ColumnName="UserID" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="Birthday" ColumnName="Birthday" />
-          <ScalarProperty Name="Sexy" ColumnName="Sexy" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="LoginNum" ColumnName="LoginNum" />
           <ScalarProperty Name="PassWord" ColumnName="PassWord" />

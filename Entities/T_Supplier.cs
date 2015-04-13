@@ -7,6 +7,9 @@ using System;
 using System.Collections.Generic;
 namespace Entities
 {
+    /// <summary>
+    /// T_Supplier
+    /// </summary>
 	public class T_Supplier
 	{
 		public T_Supplier()
@@ -14,15 +17,46 @@ namespace Entities
 			this.Enabled = true;
 			this.T_SupplierFruit = new HashSet<T_SupplierFruit>();
 		}		
+        /// <summary>
+        /// 
+        /// </summary>
 		public int SupplierID { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public string Name { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public string Address { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public string Tel { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public string Phone { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public string Contacts { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public string Detail { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public bool Enabled { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public int PlaceID { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+
 		public virtual ICollection<T_SupplierFruit> T_SupplierFruit { get; set; }
 		
 	}

@@ -35,7 +35,7 @@ namespace Service
         {
             Mapper.CreateMap<T_User,UserDTO>();
 
-            return _dal.GetEntities<T_User>(m => m.UserID == 1, true).Select( GetMappedSelector<T_User,UserDTO>()).ToList();                   
+            return _dal.GetEntities<T_User>(m =>1 == 1, true).Select( GetMappedSelector<T_User,UserDTO>()).ToList();                   
         }
 
        

@@ -7,15 +7,30 @@ using System;
 using System.Collections.Generic;
 namespace Entities
 {
+    /// <summary>
+    /// T_Storage
+    /// </summary>
 	public class T_Storage
 	{
 		public T_Storage()
 		{
 			this.Enabled = true;
 		}		
+        /// <summary>
+        /// 
+        /// </summary>
 		public int StorageID { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public int PlaceID { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public string Address { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public bool Enabled { get; set; }
 		
 	}

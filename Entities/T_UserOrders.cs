@@ -7,6 +7,9 @@ using System;
 using System.Collections.Generic;
 namespace Entities
 {
+    /// <summary>
+    /// T_UserOrders
+    /// </summary>
 	public class T_UserOrders
 	{
 		public T_UserOrders()
@@ -14,18 +17,59 @@ namespace Entities
 			this.Enabled = true;
 			this.T_ProductOrders = new HashSet<T_ProductOrders>();
 		}		
+        /// <summary>
+        /// 
+        /// </summary>
 		public int UserOrdersID { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public System.DateTime DateCreate { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public decimal Amount { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public decimal SaleAmount { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public byte OrderStatus { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public string LogisticsNum { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public System.DateTime DatePay { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public System.DateTime DateConfirm { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public int UserID { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public bool Enabled { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public decimal postage { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+
 		public virtual T_User T_User { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+
 		public virtual ICollection<T_ProductOrders> T_ProductOrders { get; set; }
 		
 	}

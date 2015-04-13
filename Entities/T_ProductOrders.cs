@@ -7,12 +7,31 @@ using System;
 using System.Collections.Generic;
 namespace Entities
 {
+    /// <summary>
+    /// T_ProductOrders
+    /// </summary>
 	public class T_ProductOrders
 	{
+        /// <summary>
+        /// 
+        /// </summary>
 		public int ProductOrdersID { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public int Count { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public int UserOrdersID { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public int ProductID { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+
 		public virtual T_UserOrders T_UserOrders { get; set; }
 		
 	}

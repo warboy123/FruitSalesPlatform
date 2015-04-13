@@ -19,11 +19,20 @@ public class EntityTemplate : CSharpTemplate
 	public override string TransformText()
 	{
 		base.TransformText();
+        string summary="";
+        if(_entitis.Documentation !=null && _entitis.Documentation.LongDescription!=null)
+            summary=_entitis.Documentation.LongDescription;
+                //entity.Documentation.Summary;
+        else
+            summary=_entitis.Name;
 #>
 using System;
 using System.Collections.Generic;
 namespace Entities
 {
+    /// <summary>
+    /// <#=summary#>
+    /// </summary>
 	public class <#= _entitis.Name #>
 	{
 <#+
@@ -67,7 +76,15 @@ namespace Entities
 		
 		foreach(var property in simpleProperties)
         {
+            string Propertysummary="";
+            if(property.Documentation !=null && property.Documentation.LongDescription!=null)
+                Propertysummary=property.Documentation.LongDescription;
+                //property.Documentation.Summary;
+           
 #>
+        /// <summary>
+        /// <#=Propertysummary#>
+        /// </summary>
 		<#=codeStringGenerator.Property(property)#>
 <#+
 		}
@@ -78,8 +95,17 @@ namespace Entities
 
 <#+
         foreach (var navigationProperty in navigationProperties)
-        {
+        { 
+            string navigationPropertysummary="";
+            if(navigationProperty.Documentation !=null && navigationProperty.Documentation.LongDescription!=null)
+                navigationPropertysummary=navigationProperty.Documentation.LongDescription;
+                //navigationProperty.Documentation.Summary;
+            
 #>
+        /// <summary>
+        /// <#=navigationPropertysummary#>
+        /// </summary>
+
 		<#=codeStringGenerator.NavigationProperty(navigationProperty)#>
 <#+
         }

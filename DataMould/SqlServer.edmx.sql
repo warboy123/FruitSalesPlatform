@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 04/12/2015 21:23:04
+-- Date Created: 04/13/2015 23:11:29
 -- Generated from EDMX file: E:\work\project\Fruit\Fruilt\DataMould\SqlServer.edmx
 -- --------------------------------------------------
 
@@ -95,7 +95,7 @@ CREATE TABLE [dbo].[T_User] (
     [UserID] int IDENTITY(1,1) NOT NULL,
     [UserName] nvarchar(100)  NOT NULL,
     [Birthday] datetime  NOT NULL,
-    [Sexy] tinyint  NOT NULL,
+    [Sex] tinyint  NOT NULL,
     [Email] nvarchar(100)  NOT NULL,
     [LoginNum] nvarchar(50)  NOT NULL,
     [PassWord] nvarchar(100)  NOT NULL,

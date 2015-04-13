@@ -7,16 +7,34 @@ using System;
 using System.Collections.Generic;
 namespace Entities
 {
+    /// <summary>
+    /// T_Place
+    /// </summary>
 	public class T_Place
 	{
 		public T_Place()
 		{
 			this.Enabled = true;
 		}		
+        /// <summary>
+        /// 
+        /// </summary>
 		public int PlaceID { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public string PlaceName { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public string PlaceType { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public int PlaceFatherID { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public bool Enabled { get; set; }
 		
 	}

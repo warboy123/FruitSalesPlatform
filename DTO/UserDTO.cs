@@ -12,7 +12,7 @@ namespace DTO
 		public int UserID { get; set; }
 		public string UserName { get; set; }
 		public System.DateTime Birthday { get; set; }
-		public byte Sexy { get; set; }
+		public byte Sex { get; set; }
 		public string Email { get; set; }
 		public string LoginNum { get; set; }
 		public string PassWord { get; set; }

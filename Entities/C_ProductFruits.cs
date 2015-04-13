@@ -7,10 +7,24 @@ using System;
 using System.Collections.Generic;
 namespace Entities
 {
+    /// <summary>
+    /// C_ProductFruits
+    /// </summary>
 	public class C_ProductFruits
 	{
+        /// <summary>
+        /// 
+        /// </summary>
 		public int ProductFruitsID { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+
 		public virtual T_Products T_Products { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+
 		public virtual T_Fruits T_Fruits { get; set; }
 		
 	}

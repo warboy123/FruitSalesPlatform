@@ -7,18 +7,55 @@ using System;
 using System.Collections.Generic;
 namespace Entities
 {
+    /// <summary>
+    /// T_Stockin
+    /// </summary>
 	public class T_Stockin
 	{
+        /// <summary>
+        /// 
+        /// </summary>
 		public int StockinID { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public string FruitID { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public decimal count { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public System.DateTime datecreate { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public string StorageID { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public int PlaceID { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public string DeliverAddress { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public System.DateTime dateStockin { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public string status { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public Nullable<int> SupplierID { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+
 		public virtual T_Fruits T_Fruits { get; set; }
 		
 	}

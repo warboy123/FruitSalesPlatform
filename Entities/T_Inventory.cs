@@ -7,12 +7,31 @@ using System;
 using System.Collections.Generic;
 namespace Entities
 {
+    /// <summary>
+    /// T_Inventory
+    /// </summary>
 	public class T_Inventory
 	{
+        /// <summary>
+        /// 
+        /// </summary>
 		public int InventoryID { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public int Count { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public int FruitID { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public int StorageID { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+
 		public virtual T_Fruits T_Fruits { get; set; }
 		
 	}

@@ -7,6 +7,9 @@ using System;
 using System.Collections.Generic;
 namespace Entities
 {
+    /// <summary>
+    /// 用户实体
+    /// </summary>
 	public class T_User
 	{
 		public T_User()
@@ -15,16 +18,51 @@ namespace Entities
 			this.T_PostAddress = new HashSet<T_PostAddress>();
 			this.T_UserOrders = new HashSet<T_UserOrders>();
 		}		
+        /// <summary>
+        /// 用户ID
+        /// </summary>
 		public int UserID { get; set; }
+        /// <summary>
+        /// 用户名称
+        /// </summary>
 		public string UserName { get; set; }
+        /// <summary>
+        /// 生日
+        /// </summary>
 		public System.DateTime Birthday { get; set; }
-		public byte Sexy { get; set; }
+        /// <summary>
+        /// 性别
+        /// </summary>
+		public byte Sex { get; set; }
+        /// <summary>
+        /// 邮箱
+        /// </summary>
 		public string Email { get; set; }
+        /// <summary>
+        /// 登陆账号
+        /// </summary>
 		public string LoginNum { get; set; }
+        /// <summary>
+        /// 登陆密码
+        /// </summary>
 		public string PassWord { get; set; }
+        /// <summary>
+        /// 手机或者固定电话
+        /// </summary>
 		public string Phone { get; set; }
+        /// <summary>
+        /// 是否有效
+        /// </summary>
 		public bool Enabled { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+
 		public virtual ICollection<T_PostAddress> T_PostAddress { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+
 		public virtual ICollection<T_UserOrders> T_UserOrders { get; set; }
 		
 	}

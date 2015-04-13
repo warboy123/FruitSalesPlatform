@@ -33,7 +33,7 @@ namespace Mvc.Controllers
             {
                 IUser.Update(userList.First());
             }
-            return View();
+            return View(new HomeModel { UserList =userList});
         }
         public JsonResult GetUser(string ID)
         {

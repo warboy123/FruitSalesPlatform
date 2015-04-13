@@ -7,22 +7,59 @@ using System;
 using System.Collections.Generic;
 namespace Entities
 {
+    /// <summary>
+    /// 地址实体
+    /// </summary>
 	public class T_PostAddress
 	{
 		public T_PostAddress()
 		{
 			this.Enabled = true;
 		}		
+        /// <summary>
+        /// 
+        /// </summary>
 		public int PostAddressID { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public string Address { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public bool IsDefault { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public string Phone { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public string ContentName { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public string Tel { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public string Detail { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public int UserID { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public int PlaceID { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public bool Enabled { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+
 		public virtual T_User T_User { get; set; }
 		
 	}

@@ -2,5 +2,9 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Index</h2>
+<ul>
+@foreach (var item in @Model.UserList)
+{
+    <li>@item.UserName</li>
+}
+</ul>

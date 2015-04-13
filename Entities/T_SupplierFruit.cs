@@ -7,15 +7,31 @@ using System;
 using System.Collections.Generic;
 namespace Entities
 {
+    /// <summary>
+    /// T_SupplierFruit
+    /// </summary>
 	public class T_SupplierFruit
 	{
 		public T_SupplierFruit()
 		{
 			this.Enabled = true;
 		}		
+        /// <summary>
+        /// 
+        /// </summary>
 		public int SupplierFruitID { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public int FruitID { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public bool Enabled { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+
 		public virtual T_Supplier T_Supplier { get; set; }
 		
 	}
