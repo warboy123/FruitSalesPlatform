@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 namespace Entities
 {
     /// <summary>
@@ -19,18 +20,24 @@ namespace Entities
         /// <summary>
         /// 
         /// </summary>
+        [Key]               
+        [Required(ErrorMessage="值不能为空")]
 		public int StorageID { get; set; }
         /// <summary>
         /// 
         /// </summary>
+        [Required(ErrorMessage="值不能为空")]
 		public int PlaceID { get; set; }
         /// <summary>
         /// 
         /// </summary>
+    
+        [MaxLength(500)]
 		public string Address { get; set; }
         /// <summary>
         /// 
         /// </summary>
+        [Required(ErrorMessage="值不能为空")]
 		public bool Enabled { get; set; }
 		
 	}

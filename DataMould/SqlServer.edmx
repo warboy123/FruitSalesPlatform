@@ -437,7 +437,7 @@
           <Property Type="Int32" Name="FruitID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="FruitName" Nullable="false" MaxLength="200" />
           <Property Type="String" Name="HowToEat" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="Detail" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Detail" Nullable="true" MaxLength="4000" />
           <Property Type="Byte" Name="ProductSeason" Nullable="false" />
           <Property Type="Int32" Name="PlaceID" Nullable="false" />
           <Property Type="Boolean" Name="Enabled" Nullable="false" DefaultValue="true" />

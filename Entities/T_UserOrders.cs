@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 namespace Entities
 {
     /// <summary>
@@ -20,46 +21,60 @@ namespace Entities
         /// <summary>
         /// 
         /// </summary>
+        [Key]               
+        [Required(ErrorMessage="值不能为空")]
 		public int UserOrdersID { get; set; }
         /// <summary>
         /// 
         /// </summary>
+        [Required(ErrorMessage="值不能为空")]
 		public System.DateTime DateCreate { get; set; }
         /// <summary>
         /// 
         /// </summary>
+        [Required(ErrorMessage="值不能为空")]
 		public decimal Amount { get; set; }
         /// <summary>
         /// 
         /// </summary>
+        [Required(ErrorMessage="值不能为空")]
 		public decimal SaleAmount { get; set; }
         /// <summary>
         /// 
         /// </summary>
+        [Required(ErrorMessage="值不能为空")]
 		public byte OrderStatus { get; set; }
         /// <summary>
         /// 
         /// </summary>
+    
+        [MaxLength()]
+        [Required(ErrorMessage="值不能为空")]
 		public string LogisticsNum { get; set; }
         /// <summary>
         /// 
         /// </summary>
+        [Required(ErrorMessage="值不能为空")]
 		public System.DateTime DatePay { get; set; }
         /// <summary>
         /// 
         /// </summary>
+        [Required(ErrorMessage="值不能为空")]
 		public System.DateTime DateConfirm { get; set; }
         /// <summary>
         /// 
         /// </summary>
+        [Required(ErrorMessage="值不能为空")]
 		public int UserID { get; set; }
         /// <summary>
         /// 
         /// </summary>
+        [Required(ErrorMessage="值不能为空")]
 		public bool Enabled { get; set; }
         /// <summary>
         /// 
         /// </summary>
+        [Required(ErrorMessage="值不能为空")]
 		public decimal postage { get; set; }
         /// <summary>
         /// 

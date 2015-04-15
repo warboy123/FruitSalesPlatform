@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 namespace Entities
 {
     /// <summary>
@@ -15,18 +16,23 @@ namespace Entities
         /// <summary>
         /// 
         /// </summary>
+        [Key]               
+        [Required(ErrorMessage="值不能为空")]
 		public int InventoryID { get; set; }
         /// <summary>
         /// 
         /// </summary>
+        [Required(ErrorMessage="值不能为空")]
 		public int Count { get; set; }
         /// <summary>
         /// 
         /// </summary>
+        [Required(ErrorMessage="值不能为空")]
 		public int FruitID { get; set; }
         /// <summary>
         /// 
         /// </summary>
+        [Required(ErrorMessage="值不能为空")]
 		public int StorageID { get; set; }
         /// <summary>
         /// 

@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 namespace Entities
 {
     /// <summary>
@@ -20,22 +21,28 @@ namespace Entities
         /// <summary>
         /// 
         /// </summary>
+        [Key]               
+        [Required(ErrorMessage="值不能为空")]
 		public int ProductID { get; set; }
         /// <summary>
         /// 
         /// </summary>
+        [Required(ErrorMessage="值不能为空")]
 		public decimal OriginalPrice { get; set; }
         /// <summary>
         /// 
         /// </summary>
+        [Required(ErrorMessage="值不能为空")]
 		public decimal SalePrice { get; set; }
         /// <summary>
         /// 
         /// </summary>
+        [Required(ErrorMessage="值不能为空")]
 		public int SalesVolume { get; set; }
         /// <summary>
         /// 
         /// </summary>
+        [Required(ErrorMessage="值不能为空")]
 		public bool Enabled { get; set; }
         /// <summary>
         /// 

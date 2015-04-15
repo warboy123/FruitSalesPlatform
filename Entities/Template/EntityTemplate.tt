@@ -28,6 +28,7 @@ public class EntityTemplate : CSharpTemplate
 #>
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 namespace Entities
 {
     /// <summary>
@@ -77,14 +78,34 @@ namespace Entities
 		foreach(var property in simpleProperties)
         {
             string Propertysummary="";
+            string KEY="[Key]";
             if(property.Documentation !=null && property.Documentation.LongDescription!=null)
                 Propertysummary=property.Documentation.LongDescription;
                 //property.Documentation.Summary;
-           
+                //sp.TypeUsage.Facets.Contains("MaxLength") ? sp.TypeUsage.Facets["MaxLength"].Value : string.Empty
+
 #>
         /// <summary>
         /// <#=Propertysummary#>
         /// </summary>
+<#+                if(property.MetadataProperties
+                    .Any(m =>    m.PropertyKind == PropertyKind.Extended 
+                && Convert.ToString(m.Value) == "Identity")){
+#>
+        <#=KEY#>               
+<#+  }           
+        foreach(var mp in   property.TypeUsage.Facets)
+            {
+                    if(mp.Name.Contains("MaxLength")){
+  #>    
+        [MaxLength(<#=Convert.ToString(mp.Value)#>)]
+<#+                    }
+            }
+         if(!property.Nullable)
+            {   #>
+        [Required(ErrorMessage="值不能为空")]
+<#+
+            }#>
 		<#=codeStringGenerator.Property(property)#>
 <#+
 		}

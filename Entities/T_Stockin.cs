@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 namespace Entities
 {
     /// <summary>
@@ -15,38 +16,56 @@ namespace Entities
         /// <summary>
         /// 
         /// </summary>
+        [Key]               
+        [Required(ErrorMessage="值不能为空")]
 		public int StockinID { get; set; }
         /// <summary>
         /// 
         /// </summary>
+    
+        [MaxLength()]
+        [Required(ErrorMessage="值不能为空")]
 		public string FruitID { get; set; }
         /// <summary>
         /// 
         /// </summary>
+        [Required(ErrorMessage="值不能为空")]
 		public decimal count { get; set; }
         /// <summary>
         /// 
         /// </summary>
+        [Required(ErrorMessage="值不能为空")]
 		public System.DateTime datecreate { get; set; }
         /// <summary>
         /// 
         /// </summary>
+    
+        [MaxLength()]
+        [Required(ErrorMessage="值不能为空")]
 		public string StorageID { get; set; }
         /// <summary>
         /// 
         /// </summary>
+        [Required(ErrorMessage="值不能为空")]
 		public int PlaceID { get; set; }
         /// <summary>
         /// 
         /// </summary>
+    
+        [MaxLength()]
+        [Required(ErrorMessage="值不能为空")]
 		public string DeliverAddress { get; set; }
         /// <summary>
         /// 
         /// </summary>
+        [Required(ErrorMessage="值不能为空")]
 		public System.DateTime dateStockin { get; set; }
         /// <summary>
         /// 
         /// </summary>
+    
+        [MaxLength()]
+        [Required(ErrorMessage="值不能为空")]
 		public string status { get; set; }
         /// <summary>
         /// 
