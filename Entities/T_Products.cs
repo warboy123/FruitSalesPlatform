@@ -19,31 +19,45 @@ namespace Entities
 			this.C_ProductFruitS = new HashSet<C_ProductFruits>();
 		}		
         /// <summary>
-        /// 
+        /// 产品ID
         /// </summary>
         [Key]               
         [Required(ErrorMessage="值不能为空")]
 		public int ProductID { get; set; }
         /// <summary>
-        /// 
+        /// 产品原价
         /// </summary>
         [Required(ErrorMessage="值不能为空")]
 		public decimal OriginalPrice { get; set; }
         /// <summary>
-        /// 
+        /// 产品折扣价
         /// </summary>
         [Required(ErrorMessage="值不能为空")]
 		public decimal SalePrice { get; set; }
         /// <summary>
-        /// 
+        /// 销售总数
         /// </summary>
         [Required(ErrorMessage="值不能为空")]
 		public int SalesVolume { get; set; }
         /// <summary>
-        /// 
+        /// 有效无效
         /// </summary>
         [Required(ErrorMessage="值不能为空")]
 		public bool Enabled { get; set; }
+        /// <summary>
+        /// 产品名称
+        /// </summary>
+    
+        [MaxLength()]
+        [Required(ErrorMessage="值不能为空")]
+		public string ProductName { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+    
+        [MaxLength()]
+        [Required(ErrorMessage="值不能为空")]
+		public string Detail { get; set; }
         /// <summary>
         /// 
         /// </summary>

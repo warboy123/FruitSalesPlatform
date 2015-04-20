@@ -15,6 +15,8 @@ namespace DataMould
     public partial class C_ProductFruits
     {
         public int ProductFruitsID { get; set; }
+        public int ProductID { get; set; }
+        public int FruitID { get; set; }
     
         public virtual T_Products T_Products { get; set; }
         public virtual T_Fruits T_Fruits { get; set; }

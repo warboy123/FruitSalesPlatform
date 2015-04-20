@@ -10,6 +10,8 @@ namespace DTO
 	public class ProductFruitsDTO
 	{		
 		public int ProductFruitsID { get; set; }
+		public int ProductID { get; set; }
+		public int FruitID { get; set; }
 		
 	}
 }

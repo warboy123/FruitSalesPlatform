@@ -14,11 +14,21 @@ namespace Entities
 	public class C_ProductFruits
 	{
         /// <summary>
-        /// 
+        /// 产品水果ID
         /// </summary>
         [Key]               
         [Required(ErrorMessage="值不能为空")]
 		public int ProductFruitsID { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        [Required(ErrorMessage="值不能为空")]
+		public int ProductID { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        [Required(ErrorMessage="值不能为空")]
+		public int FruitID { get; set; }
         /// <summary>
         /// 
         /// </summary>

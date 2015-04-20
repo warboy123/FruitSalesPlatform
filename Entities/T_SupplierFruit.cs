@@ -38,6 +38,11 @@ namespace Entities
         /// </summary>
 
 		public virtual T_Supplier T_Supplier { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+
+		public virtual T_Fruits T_Fruits { get; set; }
 		
 	}
 }

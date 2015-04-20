@@ -24,5 +24,6 @@ namespace DataMould
         public bool Enabled { get; set; }
     
         public virtual T_Supplier T_Supplier { get; set; }
+        public virtual T_Fruits T_Fruits { get; set; }
     }
 }

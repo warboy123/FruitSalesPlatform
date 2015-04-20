@@ -1,0 +1,95 @@
+﻿<#@ template language="C#" debug="True" #>
+<#@ output extension="cs" #>
+<#@ include file="BaseClassTemplate.tt" #>
+
+<#+
+
+
+public class EntityTemplate : CSharpTemplate
+{
+	
+	private EntityType _entitis;
+	public EntityTemplate(EntityType Entitis)
+	{
+		_entitis = Entitis;
+	}
+
+	public override string TransformText()
+	{
+		base.TransformText();
+#>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using IService;
+using DTO;
+using Entities;
+using IDAL;
+using Common;
+namespace Service
+{
+	public class <#= _entitis.Name.Replace("T_","").Replace("C_","")+"Service" #>: ServiceBase, <#= "I"+_entitis.Name.Replace("T_","").Replace("C_","")+"Service" #>
+	{		
+<#+
+		
+		var simpleProperties = GlobaltypeMapper.GetSimpleProperties(_entitis);
+		//var propertiesWithDefaultValues = GlobaltypeMapper.GetPropertiesWithDefaultValues(_entitis);
+		var navigationProperties = GlobaltypeMapper.GetNavigationProperties(_entitis);
+		var complexProperties = GlobaltypeMapper.GetComplexProperties(_entitis);
+		
+#>  
+        private IBaseDao _dal;
+
+        public <#= _entitis.Name.Replace("T_","").Replace("C_","")+"Service" #>(IBaseDao dal)            
+        {
+            _dal = dal;
+            
+
+        }
+        public <#= _entitis.Name.Replace("T_","").Replace("C_","")+"DTO" #> Add(<#= _entitis.Name.Replace("T_","").Replace("C_","")+"DTO" #> <#= _entitis.Name.Replace("T_","").Replace("C_","").ToLower() #>)
+        { 
+           
+            <#= _entitis.Name #> FruitResult = _dal.Insert<<#= _entitis.Name #>>(Mapper.Map<<#= _entitis.Name #>>(<#= _entitis.Name.Replace("T_","").Replace("C_","").ToLower() #>));            
+            return Mapper.Map<<#= _entitis.Name.Replace("T_","").Replace("C_","")+"DTO" #>>(FruitResult);
+        }
+        public void Delete(int <#= _entitis.Name.Replace("T_","").Replace("C_","") #>ID)
+        {
+<#+            
+            if(GlobaltypeMapper.HasTypeName(simpleProperties,"Enabled")) {
+#>
+            _dal.Update<<#= _entitis.Name #>>(new <#= _entitis.Name #> { Enabled = false }, true);
+<#+            
+            }else
+            {
+#>
+            _dal.Delete<<#= _entitis.Name #>>(new <#= _entitis.Name #> { <#= _entitis.Name.Replace("T_","").Replace("C_","") #>ID = <#= _entitis.Name.Replace("T_","").Replace("C_","") #>ID }, true);
+<#+ 
+}
+#>
+        }
+        public void Renew(<#= _entitis.Name.Replace("T_","").Replace("C_","")+"DTO" #> <#= _entitis.Name.Replace("T_","").Replace("C_","").ToLower() #>)
+        {
+           
+            _dal.Update<<#= _entitis.Name #>>(Mapper.Map<<#= _entitis.Name #>>(<#= _entitis.Name.Replace("T_","").Replace("C_","").ToLower() #>),true);
+        }
+        public <#= _entitis.Name.Replace("T_","").Replace("C_","")+"DTO" #> Get(int <#= _entitis.Name.Replace("T_","").Replace("C_","") #>ID)
+        {
+           
+            return Mapper.Map<<#= _entitis.Name.Replace("T_","").Replace("C_","")+"DTO" #>>(_dal.GetEntityByID<<#= _entitis.Name #>>(<#= _entitis.Name.Replace("T_","").Replace("C_","") #>ID));
+        }
+        public IList<<#= _entitis.Name.Replace("T_","").Replace("C_","")+"DTO" #>> GetList()
+        {
+            
+            return _dal.GetEntities<<#= _entitis.Name #>>(m => 1 == 1, true).Select(CreateDataMapper.GetMappedSelector<<#= _entitis.Name #>, <#= _entitis.Name.Replace("T_","").Replace("C_","")+"DTO" #>>()).ToList();  
+        }
+    }
+}
+<#+
+        return this.GenerationEnvironment.ToString();
+	}
+}
+#>

@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\..\..\..\..\360云盘\开发架构\EasyDevelopPlatfrom\EasyDevelopPlatfrom\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -39,9 +42,41 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CreateDataMapper.cs" />
     <Compile Include="Expression\FunctionCompositionExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomData.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Template\BaseClassTemplate.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>BaseClassTemplate.cs</LastGenOutput>
+    </None>
+    <None Include="Template\EntitisBuild.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EntitisBuild.cs</LastGenOutput>
+      <LastOutputs>
+..\CreateDataMapper.cs
+.\EntitisBuild.cs
+</LastOutputs>
+    </None>
+    <None Include="Template\EntityTemplate.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EntityTemplate.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DTO\DTO.csproj">
+      <Project>{1b7ff698-9ca9-4ff7-bad9-ccd6136397c2}</Project>
+      <Name>DTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entities\Entities.csproj">
+      <Project>{26e075d1-a34b-43d2-ba96-f8cd16353115}</Project>
+      <Name>Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

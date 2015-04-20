@@ -23,5 +23,8 @@ namespace DataMould
         public int PlaceID { get; set; }
         public string Address { get; set; }
         public bool Enabled { get; set; }
+        public int FruitID { get; set; }
+    
+        public virtual T_Fruits T_Fruits { get; set; }
     }
 }

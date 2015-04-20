@@ -51,6 +51,14 @@
       <End Role="T_Supplier" EntitySet="T_Supplier" />
       <End Role="T_SupplierFruit" EntitySet="T_SupplierFruit" />
     </AssociationSet>
+    <AssociationSet Name="T_FruitsT_Storage" Association="SqlServer.Store.T_FruitsT_Storage">
+      <End Role="T_Fruits" EntitySet="T_Fruits" />
+      <End Role="T_Storage" EntitySet="T_Storage" />
+    </AssociationSet>
+    <AssociationSet Name="T_FruitsT_SupplierFruit" Association="SqlServer.Store.T_FruitsT_SupplierFruit">
+      <End Role="T_Fruits" EntitySet="T_Fruits" />
+      <End Role="T_SupplierFruit" EntitySet="T_SupplierFruit" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="T_User">
     <Key>
@@ -75,6 +83,8 @@
     <Property Name="SalePrice" Type="decimal" Nullable="false" />
     <Property Name="SalesVolume" Type="int" Nullable="false" />
     <Property Name="Enabled" Type="bit" Nullable="false" DefaultValue="true" />
+    <Property Name="ProductName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Detail" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="T_Fruits">
     <Key>
@@ -83,7 +93,7 @@
     <Property Name="FruitID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="FruitName" Type="nvarchar" Nullable="false" MaxLength="200" />
     <Property Name="HowToEat" Type="nvarchar" Nullable="true" MaxLength="200" />
-    <Property Name="Detail" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Detail" Type="nvarchar" Nullable="true" MaxLength="4000" />
     <Property Name="ProductSeason" Type="tinyint" Nullable="false" />
     <Property Name="PlaceID" Type="int" Nullable="false" />
     <Property Name="Enabled" Type="bit" Nullable="false" DefaultValue="true" />
@@ -146,6 +156,8 @@
       <PropertyRef Name="ProductFruitsID" />
     </Key>
     <Property Name="ProductFruitsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductID" Type="int" Nullable="false" />
+    <Property Name="FruitID" Type="int" Nullable="false" />
     <Property Name="T_Products_ProductID" Type="int" Nullable="false" />
     <Property Name="T_Fruits_FruitID" Type="int" Nullable="false" />
   </EntityType>
@@ -183,6 +195,8 @@
     <Property Name="PlaceID" Type="int" Nullable="false" />
     <Property Name="Address" Type="nvarchar" Nullable="true" MaxLength="500" />
     <Property Name="Enabled" Type="bit" Nullable="false" DefaultValue="true" />
+    <Property Name="FruitID" Type="int" Nullable="false" />
+    <Property Name="T_Fruits_FruitID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="T_Supplier">
     <Key>
@@ -206,6 +220,7 @@
     <Property Name="FruitID" Type="int" Nullable="false" />
     <Property Name="Enabled" Type="bit" Nullable="false" DefaultValue="true" />
     <Property Name="T_Supplier_SupplierID" Type="int" Nullable="false" />
+    <Property Name="T_Fruits_FruitID" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="T_UserT_PostAddress">
     <End Role="T_User" Type="SqlServer.Store.T_User" Multiplicity="1" />
@@ -303,6 +318,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="T_FruitsT_Storage">
+    <End Role="T_Fruits" Type="SqlServer.Store.T_Fruits" Multiplicity="1" />
+    <End Role="T_Storage" Type="SqlServer.Store.T_Storage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_Fruits">
+        <PropertyRef Name="FruitID" />
+      </Principal>
+      <Dependent Role="T_Storage">
+        <PropertyRef Name="T_Fruits_FruitID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="T_FruitsT_SupplierFruit">
+    <End Role="T_Fruits" Type="SqlServer.Store.T_Fruits" Multiplicity="1" />
+    <End Role="T_SupplierFruit" Type="SqlServer.Store.T_SupplierFruit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_Fruits">
+        <PropertyRef Name="FruitID" />
+      </Principal>
+      <Dependent Role="T_SupplierFruit">
+        <PropertyRef Name="T_Fruits_FruitID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -351,6 +390,14 @@
           <EntitySet Name="T_SupplierFruit" EntityType="SqlServer.T_SupplierFruit" />
           <AssociationSet Name="T_SupplierT_SupplierFruit" Association="SqlServer.T_SupplierT_SupplierFruit">
             <End Role="T_Supplier" EntitySet="T_Supplier" />
+            <End Role="T_SupplierFruit" EntitySet="T_SupplierFruit" />
+          </AssociationSet>
+          <AssociationSet Name="T_FruitsT_Storage" Association="SqlServer.T_FruitsT_Storage">
+            <End Role="T_Fruits" EntitySet="T_Fruits" />
+            <End Role="T_Storage" EntitySet="T_Storage" />
+          </AssociationSet>
+          <AssociationSet Name="T_FruitsT_SupplierFruit" Association="SqlServer.T_FruitsT_SupplierFruit">
+            <End Role="T_Fruits" EntitySet="T_Fruits" />
             <End Role="T_SupplierFruit" EntitySet="T_SupplierFruit" />
           </AssociationSet>
         </EntityContainer>
@@ -423,27 +470,96 @@
           <Key>
             <PropertyRef Name="ProductID" />
           </Key>
-          <Property Type="Int32" Name="ProductID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Decimal" Name="OriginalPrice" Nullable="false" />
-          <Property Type="Decimal" Name="SalePrice" Nullable="false" />
-          <Property Type="Int32" Name="SalesVolume" Nullable="false" />
+          <Property Type="Int32" Name="ProductID" Nullable="false" annotation:StoreGeneratedPattern="Identity" >
+            <Documentation>
+              <Summary>产品ID</Summary>
+              <LongDescription>产品ID</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="Decimal" Name="OriginalPrice" Nullable="false" >
+            <Documentation>
+              <Summary>原价</Summary>
+              <LongDescription>产品原价</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="Decimal" Name="SalePrice" Nullable="false" >
+            <Documentation>
+              <Summary>折扣价</Summary>
+              <LongDescription>产品折扣价</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="Int32" Name="SalesVolume" Nullable="false" >
+            <Documentation>
+              <Summary>销售总数</Summary>
+              <LongDescription>销售总数</LongDescription>
+            </Documentation>
+          </Property>
           <NavigationProperty Name="C_ProductFruitS" Relationship="SqlServer.T_ProductsC_ProductFruitS" FromRole="T_Products" ToRole="C_ProductFruitS" />
-          <Property Type="Boolean" Name="Enabled" Nullable="false" DefaultValue="true" />
+          <Property Type="Boolean" Name="Enabled" Nullable="false" DefaultValue="true" >
+            <Documentation>
+              <Summary>有效无效</Summary>
+              <LongDescription>有效无效</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="ProductName" Nullable="false" >
+            <Documentation>
+              <Summary>名称</Summary>
+              <LongDescription>产品名称</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="Detail" Nullable="false" />
         </EntityType>
         <EntityType Name="T_Fruits">
           <Key>
             <PropertyRef Name="FruitID" />
           </Key>
-          <Property Type="Int32" Name="FruitID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="FruitName" Nullable="false" MaxLength="200" />
-          <Property Type="String" Name="HowToEat" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="Detail" Nullable="true" MaxLength="4000" />
-          <Property Type="Byte" Name="ProductSeason" Nullable="false" />
-          <Property Type="Int32" Name="PlaceID" Nullable="false" />
-          <Property Type="Boolean" Name="Enabled" Nullable="false" DefaultValue="true" />
+          <Property Type="Int32" Name="FruitID" Nullable="false" annotation:StoreGeneratedPattern="Identity" >
+            <Documentation>
+              <Summary>水果ID</Summary>
+              <LongDescription>水果ID</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="FruitName" Nullable="false" MaxLength="200" >
+            <Documentation>
+              <Summary>名称</Summary>
+              <LongDescription>水果名称</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="HowToEat" Nullable="true" MaxLength="200" >
+            <Documentation>
+              <Summary>食用方式</Summary>
+              <LongDescription>食用方式</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="Detail" Nullable="true" MaxLength="4000" >
+            <Documentation>
+              <Summary>说明</Summary>
+              <LongDescription>详细说明</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="Byte" Name="ProductSeason" Nullable="false" >
+            <Documentation>
+              <Summary>季节</Summary>
+              <LongDescription>产时</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="Int32" Name="PlaceID" Nullable="false" >
+            <Documentation>
+              <Summary>产地</Summary>
+              <LongDescription>产地</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="Boolean" Name="Enabled" Nullable="false" DefaultValue="true" >
+            <Documentation>
+              <Summary>有效</Summary>
+              <LongDescription>有效</LongDescription>
+            </Documentation>
+          </Property>
           <NavigationProperty Name="C_ProductFruits" Relationship="SqlServer.T_FruitsC_ProductFruits" FromRole="T_Fruits" ToRole="C_ProductFruits" />
           <NavigationProperty Name="T_Warehousing" Relationship="SqlServer.T_FruitsT_Warehousing" FromRole="T_Fruits" ToRole="T_Warehousing" />
           <NavigationProperty Name="T_Inventory" Relationship="SqlServer.T_FruitsT_Inventory" FromRole="T_Fruits" ToRole="T_Inventory" />
+          <NavigationProperty Name="T_Storage" Relationship="SqlServer.T_FruitsT_Storage" FromRole="T_Fruits" ToRole="T_Storage" />
+          <NavigationProperty Name="T_SupplierFruit" Relationship="SqlServer.T_FruitsT_SupplierFruit" FromRole="T_Fruits" ToRole="T_SupplierFruit" />
         </EntityType>
         <EntityType Name="T_PostAddress">
           <Documentation>
@@ -497,10 +613,30 @@
           <Key>
             <PropertyRef Name="PlaceID" />
           </Key>
-          <Property Type="Int32" Name="PlaceID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="PlaceName" Nullable="false" MaxLength="200" />
-          <Property Type="String" Name="PlaceType" Nullable="false" />
-          <Property Type="Int32" Name="PlaceFatherID" Nullable="false" />
+          <Property Type="Int32" Name="PlaceID" Nullable="false" annotation:StoreGeneratedPattern="Identity" >
+            <Documentation>
+              <Summary>地点ID</Summary>
+              <LongDescription>地点ID</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="PlaceName" Nullable="false" MaxLength="200" >
+            <Documentation>
+              <Summary>地点</Summary>
+              <LongDescription>地点名称</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="PlaceType" Nullable="false" >
+            <Documentation>
+              <Summary>类型</Summary>
+              <LongDescription>地点类型</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="Int32" Name="PlaceFatherID" Nullable="false" >
+            <Documentation>
+              <Summary>父节点ID</Summary>
+              <LongDescription>父节点ID</LongDescription>
+            </Documentation>
+          </Property>
           <Property Type="Boolean" Name="Enabled" Nullable="false" DefaultValue="true" />
           </EntityType>
         <Association Name="T_UserT_PostAddress">
@@ -519,9 +655,16 @@
           <Key>
             <PropertyRef Name="ProductFruitsID" />
           </Key>
-          <Property Type="Int32" Name="ProductFruitsID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ProductFruitsID" Nullable="false" annotation:StoreGeneratedPattern="Identity" >
+            <Documentation>
+              <Summary>产品水果ID</Summary>
+              <LongDescription>产品水果ID</LongDescription>
+            </Documentation>
+          </Property>
           <NavigationProperty Name="T_Products" Relationship="SqlServer.T_ProductsC_ProductFruitS" FromRole="C_ProductFruitS" ToRole="T_Products" />
           <NavigationProperty Name="T_Fruits" Relationship="SqlServer.T_FruitsC_ProductFruits" FromRole="C_ProductFruits" ToRole="T_Fruits" />
+          <Property Type="Int32" Name="ProductID" Nullable="false" />
+          <Property Type="Int32" Name="FruitID" Nullable="false" />
         </EntityType>
         <Association Name="T_ProductsC_ProductFruitS">
           <End Type="SqlServer.T_Products" Role="T_Products" Multiplicity="1" />
@@ -541,7 +684,11 @@
           <Key>
             <PropertyRef Name="StockinID" />
           </Key>
-          <Property Type="Int32" Name="StockinID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="StockinID" Nullable="false" annotation:StoreGeneratedPattern="Identity" >
+            <Documentation>
+              <Summary>入库</Summary>
+            </Documentation>
+          </Property>
           <Property Type="String" Name="FruitID" Nullable="false" />
           <Property Type="Decimal" Name="count" Nullable="false" />
           <Property Type="DateTime" Name="datecreate" Nullable="false" />
@@ -573,6 +720,8 @@
           <Property Type="Int32" Name="PlaceID" Nullable="false" />
           <Property Type="String" Name="Address" Nullable="true" MaxLength="500" />
           <Property Type="Boolean" Name="Enabled" Nullable="false" DefaultValue="true" />
+          <NavigationProperty Name="T_Fruits" Relationship="SqlServer.T_FruitsT_Storage" FromRole="T_Storage" ToRole="T_Fruits" />
+          <Property Type="Int32" Name="FruitID" Nullable="false" />
         </EntityType>
         <EntityType Name="T_Supplier">
           <Key>
@@ -597,9 +746,18 @@
           <Property Type="Int32" Name="FruitID" Nullable="false" />
           <NavigationProperty Name="T_Supplier" Relationship="SqlServer.T_SupplierT_SupplierFruit" FromRole="T_SupplierFruit" ToRole="T_Supplier" />
           <Property Type="Boolean" Name="Enabled" Nullable="false" DefaultValue="true" />
+          <NavigationProperty Name="T_Fruits" Relationship="SqlServer.T_FruitsT_SupplierFruit" FromRole="T_SupplierFruit" ToRole="T_Fruits" />
         </EntityType>
         <Association Name="T_SupplierT_SupplierFruit">
           <End Type="SqlServer.T_Supplier" Role="T_Supplier" Multiplicity="1" />
+          <End Type="SqlServer.T_SupplierFruit" Role="T_SupplierFruit" Multiplicity="*" />
+        </Association>
+        <Association Name="T_FruitsT_Storage">
+          <End Type="SqlServer.T_Fruits" Role="T_Fruits" Multiplicity="1" />
+          <End Type="SqlServer.T_Storage" Role="T_Storage" Multiplicity="*" />
+        </Association>
+        <Association Name="T_FruitsT_SupplierFruit">
+          <End Type="SqlServer.T_Fruits" Role="T_Fruits" Multiplicity="1" />
           <End Type="SqlServer.T_SupplierFruit" Role="T_SupplierFruit" Multiplicity="*" />
         </Association>
       </Schema>
@@ -631,6 +789,8 @@
           <ScalarProperty Name="SalePrice" ColumnName="SalePrice" />
           <ScalarProperty Name="SalesVolume" ColumnName="SalesVolume" />
           <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="Detail" ColumnName="Detail" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -705,6 +865,8 @@
       <EntityTypeMapping TypeName="IsTypeOf(SqlServer.C_ProductFruits)">
         <MappingFragment StoreEntitySet="C_ProductFruitS">
           <ScalarProperty Name="ProductFruitsID" ColumnName="ProductFruitsID" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="FruitID" ColumnName="FruitID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -741,6 +903,7 @@
           <ScalarProperty Name="PlaceID" ColumnName="PlaceID" />
           <ScalarProperty Name="Address" ColumnName="Address" />
           <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+          <ScalarProperty Name="FruitID" ColumnName="FruitID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -827,6 +990,22 @@
     <AssociationSetMapping Name="T_SupplierT_SupplierFruit" TypeName="SqlServer.T_SupplierT_SupplierFruit" StoreEntitySet="T_SupplierFruit">
       <EndProperty Name="T_Supplier">
         <ScalarProperty Name="SupplierID" ColumnName="T_Supplier_SupplierID" />
+      </EndProperty>
+      <EndProperty Name="T_SupplierFruit">
+        <ScalarProperty Name="SupplierFruitID" ColumnName="SupplierFruitID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="T_FruitsT_Storage" TypeName="SqlServer.T_FruitsT_Storage" StoreEntitySet="T_Storage">
+      <EndProperty Name="T_Fruits">
+        <ScalarProperty Name="FruitID" ColumnName="T_Fruits_FruitID" />
+      </EndProperty>
+      <EndProperty Name="T_Storage">
+        <ScalarProperty Name="StorageID" ColumnName="StorageID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="T_FruitsT_SupplierFruit" TypeName="SqlServer.T_FruitsT_SupplierFruit" StoreEntitySet="T_SupplierFruit">
+      <EndProperty Name="T_Fruits">
+        <ScalarProperty Name="FruitID" ColumnName="T_Fruits_FruitID" />
       </EndProperty>
       <EndProperty Name="T_SupplierFruit">
         <ScalarProperty Name="SupplierFruitID" ColumnName="SupplierFruitID" />

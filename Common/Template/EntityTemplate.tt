@@ -1,0 +1,63 @@
+﻿<#@ template language="C#" debug="True" #>
+<#@ output extension="cs" #>
+<#@ include file="BaseClassTemplate.tt" #>
+
+<#+
+
+
+public class EntityTemplate : CSharpTemplate
+{
+	
+	private IEnumerable<EntityType> _entitis;
+	public EntityTemplate(IEnumerable<EntityType> Entitis)
+	{
+		_entitis = Entitis;
+	}
+
+	public override string TransformText()
+	{
+		base.TransformText();
+#>
+using System;
+using System.Collections.Generic;
+using Entities;
+using DTO;
+using AutoMapper;
+using System.Linq.Expressions;
+namespace Common
+{
+	public class CreateDataMapper
+	{	
+        public CreateDataMapper()
+        {
+<#+
+        foreach(var en in _entitis)
+        {
+#>
+            Mapper.CreateMap<<#= en.Name#>,<#= en.Name.Replace("T_","").Replace("C_","")+"DTO" #>>();
+            Mapper.CreateMap<<#= en.Name.Replace("T_","").Replace("C_","")+"DTO" #>, <#= en.Name#>>();      
+        
+<#+ 
+        }
+ #>	
+        }
+        public static Expression<Func<TSource, TResult>> GetMappedSelector<TSource, TResult>()
+        {
+            Expression<Func<TSource, TResult>> mapperExpression = AutoMapper.QueryableExtensions.Extensions.CreateMapExpression<TSource, TResult>(Mapper.Engine);
+            //Expression<Func<UserDTO,T_User >> mappedSelector = selector.Compose(mapper);
+            return mapperExpression;
+        }
+        public static Expression<Func<TEntity, bool>> GetMappedCondition<TEntity, TDTO>(Expression<Func<TDTO, bool>> condition)
+        {
+            Expression<Func<TEntity, TDTO>> mapper = AutoMapper.QueryableExtensions.Extensions.CreateMapExpression<TEntity, TDTO>(Mapper.Engine);
+            Expression<Func<TEntity, bool>> mappedSelector = condition.Compose(mapper);
+            return mappedSelector;
+        }
+    }
+}
+
+<#+
+        return this.GenerationEnvironment.ToString();
+	}
+}
+#>

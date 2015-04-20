@@ -23,7 +23,7 @@ namespace DAL
         public DbEntities()
             : base(nameOrConnectionString: ConnectionString())
         {
-            
+            Database.SetInitializer<DbEntities>(null);
            
         }
         
@@ -47,6 +47,7 @@ namespace DAL
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            modelBuilder.Conventions.Remove<IncludeMetadataConvention>();
             //throw new UnintentionalCodeFirstException();
         }
 

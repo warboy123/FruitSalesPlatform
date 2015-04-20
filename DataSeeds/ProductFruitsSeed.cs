@@ -18,6 +18,8 @@ namespace DataSeeds
             return new C_ProductFruits
                         {
                             ProductFruitsID=RandomData.GetRandomInt(1,100),
+                            ProductID=RandomData.GetRandomInt(1,100),
+                            FruitID=RandomData.GetRandomInt(1,100),
 		
 	                    };
         }
@@ -26,6 +28,8 @@ namespace DataSeeds
             return new ProductFruitsDTO
                         {
                             ProductFruitsID=RandomData.GetRandomInt(1,100),
+                            ProductID=RandomData.GetRandomInt(1,100),
+                            FruitID=RandomData.GetRandomInt(1,100),
 		
 	                    };
         }

@@ -32,7 +32,7 @@ namespace Mvc.Controllers
             }
             else
             {
-                IUser.Update(userList.First());
+                IUser.Renew(userList.First());
             }
             string randomName = RandomData.GetRandomName();
             return View(new HomeModel { UserList =userList});

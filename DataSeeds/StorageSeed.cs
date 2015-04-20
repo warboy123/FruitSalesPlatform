@@ -21,6 +21,7 @@ namespace DataSeeds
                             PlaceID=RandomData.GetRandomInt(1,100),
                             Address="",
                             Enabled=true,
+                            FruitID=RandomData.GetRandomInt(1,100),
 		
 	                    };
         }
@@ -32,6 +33,7 @@ namespace DataSeeds
                             PlaceID=RandomData.GetRandomInt(1,100),
                             Address="",
                             Enabled=true,
+                            FruitID=RandomData.GetRandomInt(1,100),
 		
 	                    };
         }

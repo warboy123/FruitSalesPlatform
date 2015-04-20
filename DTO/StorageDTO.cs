@@ -13,6 +13,7 @@ namespace DTO
 		public int PlaceID { get; set; }
 		public string Address { get; set; }
 		public bool Enabled { get; set; }
+		public int FruitID { get; set; }
 		
 	}
 }

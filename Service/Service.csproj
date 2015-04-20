@@ -48,12 +48,55 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FruitsService.cs" />
+    <Compile Include="InventoryService.cs" />
+    <Compile Include="PlaceService.cs" />
+    <Compile Include="PostAddressService.cs" />
+    <Compile Include="ProductFruitsService.cs" />
+    <Compile Include="ProductOrdersService.cs" />
+    <Compile Include="ProductsService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceBase.cs" />
+    <Compile Include="StockinService.cs" />
+    <Compile Include="StorageService.cs" />
+    <Compile Include="SupplierFruitService.cs" />
+    <Compile Include="SupplierService.cs" />
+    <Compile Include="Template\BaseClassTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BaseClassTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserOrdersService.cs" />
     <Compile Include="UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Template\BaseClassTemplate.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>BaseClassTemplate.cs</LastGenOutput>
+    </None>
+    <None Include="Template\EntitisBuild.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EntitisBuild.cs</LastGenOutput>
+      <LastOutputs>
+..\InventoryService.cs
+..\PlaceService.cs
+..\PostAddressService.cs
+..\ProductFruitsService.cs
+..\ProductOrdersService.cs
+..\ProductsService.cs
+..\StockinService.cs
+..\StorageService.cs
+..\SupplierFruitService.cs
+..\SupplierService.cs
+..\UserOrdersService.cs
+..\UserService.cs
+.\EntitisBuild.cs
+</LastOutputs>
+    </None>
+    <None Include="Template\EntityTemplate.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EntityTemplate.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
@@ -76,6 +119,9 @@
       <Project>{bf3a7588-7156-4582-ab0e-608ff1ff8c9c}</Project>
       <Name>IService</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

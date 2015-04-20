@@ -14,6 +14,8 @@ namespace DTO
 		public decimal SalePrice { get; set; }
 		public int SalesVolume { get; set; }
 		public bool Enabled { get; set; }
+		public string ProductName { get; set; }
+		public string Detail { get; set; }
 		
 	}
 }

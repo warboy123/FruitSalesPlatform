@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 04/13/2015 23:11:29
+-- Date Created: 04/19/2015 09:54:34
 -- Generated from EDMX file: E:\work\project\Fruit\Fruilt\DataMould\SqlServer.edmx
 -- --------------------------------------------------
 
@@ -110,7 +110,9 @@ CREATE TABLE [dbo].[T_Products] (
     [OriginalPrice] decimal(18,0)  NOT NULL,
     [SalePrice] decimal(18,0)  NOT NULL,
     [SalesVolume] int  NOT NULL,
-    [Enabled] bit  NOT NULL
+    [Enabled] bit  NOT NULL,
+    [ProductName] nvarchar(max)  NOT NULL,
+    [Detail] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -119,7 +121,7 @@ CREATE TABLE [dbo].[T_Fruits] (
     [FruitID] int IDENTITY(1,1) NOT NULL,
     [FruitName] nvarchar(200)  NOT NULL,
     [HowToEat] nvarchar(200)  NULL,
-    [Detail] nvarchar(max)  NULL,
+    [Detail] nvarchar(4000)  NULL,
     [ProductSeason] tinyint  NOT NULL,
     [PlaceID] int  NOT NULL,
     [Enabled] bit  NOT NULL
@@ -182,6 +184,8 @@ GO
 -- Creating table 'C_ProductFruitS'
 CREATE TABLE [dbo].[C_ProductFruitS] (
     [ProductFruitsID] int IDENTITY(1,1) NOT NULL,
+    [ProductID] int  NOT NULL,
+    [FruitID] int  NOT NULL,
     [T_Products_ProductID] int  NOT NULL,
     [T_Fruits_FruitID] int  NOT NULL
 );
@@ -218,7 +222,9 @@ CREATE TABLE [dbo].[T_Storage] (
     [StorageID] int IDENTITY(1,1) NOT NULL,
     [PlaceID] int  NOT NULL,
     [Address] nvarchar(500)  NULL,
-    [Enabled] bit  NOT NULL
+    [Enabled] bit  NOT NULL,
+    [FruitID] int  NOT NULL,
+    [T_Fruits_FruitID] int  NOT NULL
 );
 GO
 
@@ -241,7 +247,8 @@ CREATE TABLE [dbo].[T_SupplierFruit] (
     [SupplierFruitID] int IDENTITY(1,1) NOT NULL,
     [FruitID] int  NOT NULL,
     [Enabled] bit  NOT NULL,
-    [T_Supplier_SupplierID] int  NOT NULL
+    [T_Supplier_SupplierID] int  NOT NULL,
+    [T_Fruits_FruitID] int  NOT NULL
 );
 GO
 
@@ -441,6 +448,34 @@ ADD CONSTRAINT [FK_T_SupplierT_SupplierFruit]
 CREATE INDEX [IX_FK_T_SupplierT_SupplierFruit]
 ON [dbo].[T_SupplierFruit]
     ([T_Supplier_SupplierID]);
+GO
+
+-- Creating foreign key on [T_Fruits_FruitID] in table 'T_Storage'
+ALTER TABLE [dbo].[T_Storage]
+ADD CONSTRAINT [FK_T_FruitsT_Storage]
+    FOREIGN KEY ([T_Fruits_FruitID])
+    REFERENCES [dbo].[T_Fruits]
+        ([FruitID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_T_FruitsT_Storage'
+CREATE INDEX [IX_FK_T_FruitsT_Storage]
+ON [dbo].[T_Storage]
+    ([T_Fruits_FruitID]);
+GO
+
+-- Creating foreign key on [T_Fruits_FruitID] in table 'T_SupplierFruit'
+ALTER TABLE [dbo].[T_SupplierFruit]
+ADD CONSTRAINT [FK_T_FruitsT_SupplierFruit]
+    FOREIGN KEY ([T_Fruits_FruitID])
+    REFERENCES [dbo].[T_Fruits]
+        ([FruitID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_T_FruitsT_SupplierFruit'
+CREATE INDEX [IX_FK_T_FruitsT_SupplierFruit]
+ON [dbo].[T_SupplierFruit]
+    ([T_Fruits_FruitID]);
 GO
 
 -- --------------------------------------------------

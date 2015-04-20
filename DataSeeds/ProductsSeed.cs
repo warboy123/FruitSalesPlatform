@@ -22,6 +22,8 @@ namespace DataSeeds
                             SalePrice=0,
                             SalesVolume=RandomData.GetRandomInt(1,100),
                             Enabled=true,
+                            ProductName="",
+                            Detail="",
 		
 	                    };
         }
@@ -34,6 +36,8 @@ namespace DataSeeds
                             SalePrice=0,
                             SalesVolume=RandomData.GetRandomInt(1,100),
                             Enabled=true,
+                            ProductName="",
+                            Detail="",
 		
 	                    };
         }

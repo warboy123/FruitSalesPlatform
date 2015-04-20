@@ -39,6 +39,16 @@ namespace Entities
         /// </summary>
         [Required(ErrorMessage="值不能为空")]
 		public bool Enabled { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        [Required(ErrorMessage="值不能为空")]
+		public int FruitID { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+
+		public virtual T_Fruits T_Fruits { get; set; }
 		
 	}
 }

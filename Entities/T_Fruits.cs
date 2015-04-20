@@ -19,44 +19,46 @@ namespace Entities
 			this.C_ProductFruits = new HashSet<C_ProductFruits>();
 			this.T_Warehousing = new HashSet<T_Stockin>();
 			this.T_Inventory = new HashSet<T_Inventory>();
+			this.T_Storage = new HashSet<T_Storage>();
+			this.T_SupplierFruit = new HashSet<T_SupplierFruit>();
 		}		
         /// <summary>
-        /// 
+        /// 水果ID
         /// </summary>
         [Key]               
         [Required(ErrorMessage="值不能为空")]
 		public int FruitID { get; set; }
         /// <summary>
-        /// 
+        /// 水果名称
         /// </summary>
     
         [MaxLength(200)]
         [Required(ErrorMessage="值不能为空")]
 		public string FruitName { get; set; }
         /// <summary>
-        /// 
+        /// 食用方式
         /// </summary>
     
         [MaxLength(200)]
 		public string HowToEat { get; set; }
         /// <summary>
-        /// 
+        /// 详细说明
         /// </summary>
     
         [MaxLength(4000)]
 		public string Detail { get; set; }
         /// <summary>
-        /// 
+        /// 产时
         /// </summary>
         [Required(ErrorMessage="值不能为空")]
 		public byte ProductSeason { get; set; }
         /// <summary>
-        /// 
+        /// 产地
         /// </summary>
         [Required(ErrorMessage="值不能为空")]
 		public int PlaceID { get; set; }
         /// <summary>
-        /// 
+        /// 有效
         /// </summary>
         [Required(ErrorMessage="值不能为空")]
 		public bool Enabled { get; set; }
@@ -75,6 +77,16 @@ namespace Entities
         /// </summary>
 
 		public virtual ICollection<T_Inventory> T_Inventory { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+
+		public virtual ICollection<T_Storage> T_Storage { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+
+		public virtual ICollection<T_SupplierFruit> T_SupplierFruit { get; set; }
 		
 	}
 }

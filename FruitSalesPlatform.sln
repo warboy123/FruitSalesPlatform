@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataMould", "DataMould\Data
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSeeds", "DataSeeds\DataSeeds.csproj", "{19CD3ADF-17FB-4236-9068-181B9AD0065A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsoleClient", "TestConsoleClient\TestConsoleClient.csproj", "{BF204A5C-957B-4D77-A6B6-574296AB20AB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -82,6 +84,10 @@ Global
 		{19CD3ADF-17FB-4236-9068-181B9AD0065A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19CD3ADF-17FB-4236-9068-181B9AD0065A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19CD3ADF-17FB-4236-9068-181B9AD0065A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF204A5C-957B-4D77-A6B6-574296AB20AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF204A5C-957B-4D77-A6B6-574296AB20AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF204A5C-957B-4D77-A6B6-574296AB20AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF204A5C-957B-4D77-A6B6-574296AB20AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -98,5 +104,6 @@ Global
 		{19CD3ADF-17FB-4236-9068-181B9AD0065A} = {1956475E-E0AC-4497-81DF-B5D6967F494D}
 		{81FC6C58-8F0A-4135-BC8D-3C32AC647184} = {00B8EAD5-E33F-4C58-A720-24E8AB9D8F8D}
 		{D426CD00-F66E-45DC-AB85-5B0468F0CF81} = {00B8EAD5-E33F-4C58-A720-24E8AB9D8F8D}
+		{BF204A5C-957B-4D77-A6B6-574296AB20AB} = {00B8EAD5-E33F-4C58-A720-24E8AB9D8F8D}
 	EndGlobalSection
 EndGlobal
