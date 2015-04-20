@@ -52,11 +52,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EntitisBuild.tt</DependentUpon>
     </Compile>
+    <Compile Include="T_FruitPic.cs" />
     <Compile Include="T_Fruits.cs" />
     <Compile Include="T_Inventory.cs" />
+    <Compile Include="T_Manager.cs" />
+    <Compile Include="T_ManagerPermission.cs" />
+    <Compile Include="T_Permission.cs" />
     <Compile Include="T_Place.cs" />
     <Compile Include="T_PostAddress.cs" />
     <Compile Include="T_ProductOrders.cs" />
+    <Compile Include="T_ProductPic.cs" />
     <Compile Include="T_Products.cs" />
     <Compile Include="T_Stockin.cs" />
     <Compile Include="T_Storage.cs" />
@@ -75,11 +80,16 @@
       <LastGenOutput>EntitisBuild1.cs</LastGenOutput>
       <LastOutputs>
 ..\C_ProductFruits.cs
+..\T_FruitPic.cs
 ..\T_Fruits.cs
 ..\T_Inventory.cs
+..\T_Manager.cs
+..\T_ManagerPermission.cs
+..\T_Permission.cs
 ..\T_Place.cs
 ..\T_PostAddress.cs
 ..\T_ProductOrders.cs
+..\T_ProductPic.cs
 ..\T_Products.cs
 ..\T_Stockin.cs
 ..\T_Storage.cs

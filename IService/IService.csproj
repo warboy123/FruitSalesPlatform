@@ -46,12 +46,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\IBaseService.cs" />
+    <Compile Include="IFruitPicService.cs" />
     <Compile Include="IFruitsService.cs" />
     <Compile Include="IInventoryService.cs" />
+    <Compile Include="IManagerPermissionService.cs" />
+    <Compile Include="IManagerService.cs" />
+    <Compile Include="IPermissionService.cs" />
     <Compile Include="IPlaceService.cs" />
     <Compile Include="IPostAddressService.cs" />
     <Compile Include="IProductFruitsService.cs" />
     <Compile Include="IProductOrdersService.cs" />
+    <Compile Include="IProductPicService.cs" />
     <Compile Include="IProductsService.cs" />
     <Compile Include="IStockinService.cs" />
     <Compile Include="IStorageService.cs" />
@@ -85,12 +90,17 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>EntitisBuild.cs</LastGenOutput>
       <LastOutputs>
+..\IFruitPicService.cs
 ..\IFruitsService.cs
 ..\IInventoryService.cs
+..\IManagerPermissionService.cs
+..\IManagerService.cs
+..\IPermissionService.cs
 ..\IPlaceService.cs
 ..\IPostAddressService.cs
 ..\IProductFruitsService.cs
 ..\IProductOrdersService.cs
+..\IProductPicService.cs
 ..\IProductsService.cs
 ..\IStockinService.cs
 ..\IStorageService.cs
@@ -111,7 +121,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy $(TargetPath) $(SolutionDir)\Mvc\bin</PostBuildEvent>
+    <PostBuildEvent>copy $(TargetPath) $(SolutionDir)\Mvc\bin
+copy $(TargetPath) $(SolutionDir)\MvcAdmin\bin</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

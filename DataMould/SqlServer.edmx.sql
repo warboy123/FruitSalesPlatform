@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 04/19/2015 09:54:34
+-- Date Created: 04/21/2015 00:56:17
 -- Generated from EDMX file: E:\work\project\Fruit\Fruilt\DataMould\SqlServer.edmx
 -- --------------------------------------------------
 
@@ -40,6 +40,18 @@ IF OBJECT_ID(N'[dbo].[FK_T_FruitsT_Inventory]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_T_SupplierT_SupplierFruit]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[T_SupplierFruit] DROP CONSTRAINT [FK_T_SupplierT_SupplierFruit];
+GO
+IF OBJECT_ID(N'[dbo].[FK_T_FruitsT_Storage]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[T_Storage] DROP CONSTRAINT [FK_T_FruitsT_Storage];
+GO
+IF OBJECT_ID(N'[dbo].[FK_T_FruitsT_SupplierFruit]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[T_SupplierFruit] DROP CONSTRAINT [FK_T_FruitsT_SupplierFruit];
+GO
+IF OBJECT_ID(N'[dbo].[FK_T_PermissionT_ManagerPermission]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[T_ManagerPermission] DROP CONSTRAINT [FK_T_PermissionT_ManagerPermission];
+GO
+IF OBJECT_ID(N'[dbo].[FK_T_ManagerT_ManagerPermission]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[T_ManagerPermission] DROP CONSTRAINT [FK_T_ManagerT_ManagerPermission];
 GO
 
 -- --------------------------------------------------
@@ -84,6 +96,15 @@ IF OBJECT_ID(N'[dbo].[T_Supplier]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[T_SupplierFruit]', 'U') IS NOT NULL
     DROP TABLE [dbo].[T_SupplierFruit];
+GO
+IF OBJECT_ID(N'[dbo].[T_Manager]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[T_Manager];
+GO
+IF OBJECT_ID(N'[dbo].[T_Permission]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[T_Permission];
+GO
+IF OBJECT_ID(N'[dbo].[T_ManagerPermission]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[T_ManagerPermission];
 GO
 
 -- --------------------------------------------------
@@ -252,6 +273,64 @@ CREATE TABLE [dbo].[T_SupplierFruit] (
 );
 GO
 
+-- Creating table 'T_Manager'
+CREATE TABLE [dbo].[T_Manager] (
+    [ManagerID] int IDENTITY(1,1) NOT NULL,
+    [LoginNum] nvarchar(200)  NOT NULL,
+    [PassWord] nvarchar(200)  NOT NULL,
+    [Enabled] bit  NOT NULL,
+    [DateCreate] datetime  NOT NULL
+);
+GO
+
+-- Creating table 'T_Permission'
+CREATE TABLE [dbo].[T_Permission] (
+    [PermissionID] int IDENTITY(1,1) NOT NULL,
+    [PermissionName] nvarchar(200)  NOT NULL,
+    [PermissionNum] nvarchar(200)  NOT NULL,
+    [ParentNum] nvarchar(200)  NOT NULL,
+    [PermissionType] tinyint  NOT NULL,
+    [PermissionUrl] nvarchar(200)  NOT NULL,
+    [PermissionAction] nvarchar(200)  NOT NULL,
+    [PermissionStyle] nvarchar(200)  NOT NULL,
+    [Enabled] bit  NOT NULL
+);
+GO
+
+-- Creating table 'T_ManagerPermission'
+CREATE TABLE [dbo].[T_ManagerPermission] (
+    [ManagerPermissionID] int IDENTITY(1,1) NOT NULL,
+    [ManagerID] int  NOT NULL,
+    [PermissionID] int  NOT NULL,
+    [Enabled] bit  NOT NULL,
+    [Permission] tinyint  NOT NULL,
+    [T_Permission_PermissionID] int  NOT NULL,
+    [T_Manager_ManagerID] int  NOT NULL
+);
+GO
+
+-- Creating table 'T_ProductPic'
+CREATE TABLE [dbo].[T_ProductPic] (
+    [ProductPicID] int IDENTITY(1,1) NOT NULL,
+    [PicURL] nvarchar(500)  NOT NULL,
+    [ThumbPicURL] nvarchar(500)  NOT NULL,
+    [DateCreate] datetime  NOT NULL,
+    [ProductID] int  NOT NULL,
+    [T_Products_ProductID] int  NOT NULL
+);
+GO
+
+-- Creating table 'T_FruitPic'
+CREATE TABLE [dbo].[T_FruitPic] (
+    [FruitPicID] int IDENTITY(1,1) NOT NULL,
+    [PicURL] nvarchar(500)  NOT NULL,
+    [ThumbPicURL] nvarchar(500)  NOT NULL,
+    [DateCreate] datetime  NOT NULL,
+    [FruitID] int  NOT NULL,
+    [T_Fruits_FruitID] int  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -332,6 +411,36 @@ GO
 ALTER TABLE [dbo].[T_SupplierFruit]
 ADD CONSTRAINT [PK_T_SupplierFruit]
     PRIMARY KEY CLUSTERED ([SupplierFruitID] ASC);
+GO
+
+-- Creating primary key on [ManagerID] in table 'T_Manager'
+ALTER TABLE [dbo].[T_Manager]
+ADD CONSTRAINT [PK_T_Manager]
+    PRIMARY KEY CLUSTERED ([ManagerID] ASC);
+GO
+
+-- Creating primary key on [PermissionID] in table 'T_Permission'
+ALTER TABLE [dbo].[T_Permission]
+ADD CONSTRAINT [PK_T_Permission]
+    PRIMARY KEY CLUSTERED ([PermissionID] ASC);
+GO
+
+-- Creating primary key on [ManagerPermissionID] in table 'T_ManagerPermission'
+ALTER TABLE [dbo].[T_ManagerPermission]
+ADD CONSTRAINT [PK_T_ManagerPermission]
+    PRIMARY KEY CLUSTERED ([ManagerPermissionID] ASC);
+GO
+
+-- Creating primary key on [ProductPicID] in table 'T_ProductPic'
+ALTER TABLE [dbo].[T_ProductPic]
+ADD CONSTRAINT [PK_T_ProductPic]
+    PRIMARY KEY CLUSTERED ([ProductPicID] ASC);
+GO
+
+-- Creating primary key on [FruitPicID] in table 'T_FruitPic'
+ALTER TABLE [dbo].[T_FruitPic]
+ADD CONSTRAINT [PK_T_FruitPic]
+    PRIMARY KEY CLUSTERED ([FruitPicID] ASC);
 GO
 
 -- --------------------------------------------------
@@ -475,6 +584,62 @@ ADD CONSTRAINT [FK_T_FruitsT_SupplierFruit]
 -- Creating non-clustered index for FOREIGN KEY 'FK_T_FruitsT_SupplierFruit'
 CREATE INDEX [IX_FK_T_FruitsT_SupplierFruit]
 ON [dbo].[T_SupplierFruit]
+    ([T_Fruits_FruitID]);
+GO
+
+-- Creating foreign key on [T_Permission_PermissionID] in table 'T_ManagerPermission'
+ALTER TABLE [dbo].[T_ManagerPermission]
+ADD CONSTRAINT [FK_T_PermissionT_ManagerPermission]
+    FOREIGN KEY ([T_Permission_PermissionID])
+    REFERENCES [dbo].[T_Permission]
+        ([PermissionID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_T_PermissionT_ManagerPermission'
+CREATE INDEX [IX_FK_T_PermissionT_ManagerPermission]
+ON [dbo].[T_ManagerPermission]
+    ([T_Permission_PermissionID]);
+GO
+
+-- Creating foreign key on [T_Manager_ManagerID] in table 'T_ManagerPermission'
+ALTER TABLE [dbo].[T_ManagerPermission]
+ADD CONSTRAINT [FK_T_ManagerT_ManagerPermission]
+    FOREIGN KEY ([T_Manager_ManagerID])
+    REFERENCES [dbo].[T_Manager]
+        ([ManagerID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_T_ManagerT_ManagerPermission'
+CREATE INDEX [IX_FK_T_ManagerT_ManagerPermission]
+ON [dbo].[T_ManagerPermission]
+    ([T_Manager_ManagerID]);
+GO
+
+-- Creating foreign key on [T_Products_ProductID] in table 'T_ProductPic'
+ALTER TABLE [dbo].[T_ProductPic]
+ADD CONSTRAINT [FK_T_ProductsT_ProductPic]
+    FOREIGN KEY ([T_Products_ProductID])
+    REFERENCES [dbo].[T_Products]
+        ([ProductID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_T_ProductsT_ProductPic'
+CREATE INDEX [IX_FK_T_ProductsT_ProductPic]
+ON [dbo].[T_ProductPic]
+    ([T_Products_ProductID]);
+GO
+
+-- Creating foreign key on [T_Fruits_FruitID] in table 'T_FruitPic'
+ALTER TABLE [dbo].[T_FruitPic]
+ADD CONSTRAINT [FK_T_FruitsT_FruitPic]
+    FOREIGN KEY ([T_Fruits_FruitID])
+    REFERENCES [dbo].[T_Fruits]
+        ([FruitID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_T_FruitsT_FruitPic'
+CREATE INDEX [IX_FK_T_FruitsT_FruitPic]
+ON [dbo].[T_FruitPic]
     ([T_Fruits_FruitID]);
 GO
 

@@ -21,6 +21,7 @@ namespace Entities
 			this.T_Inventory = new HashSet<T_Inventory>();
 			this.T_Storage = new HashSet<T_Storage>();
 			this.T_SupplierFruit = new HashSet<T_SupplierFruit>();
+			this.T_FruitPic = new HashSet<T_FruitPic>();
 		}		
         /// <summary>
         /// 水果ID
@@ -87,6 +88,11 @@ namespace Entities
         /// </summary>
 
 		public virtual ICollection<T_SupplierFruit> T_SupplierFruit { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+
+		public virtual ICollection<T_FruitPic> T_FruitPic { get; set; }
 		
 	}
 }

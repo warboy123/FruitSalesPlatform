@@ -38,5 +38,10 @@ namespace DataMould
         public DbSet<T_Storage> T_Storage { get; set; }
         public DbSet<T_Supplier> T_Supplier { get; set; }
         public DbSet<T_SupplierFruit> T_SupplierFruit { get; set; }
+        public DbSet<T_Manager> T_Manager { get; set; }
+        public DbSet<T_Permission> T_Permission { get; set; }
+        public DbSet<T_ManagerPermission> T_ManagerPermission { get; set; }
+        public DbSet<T_ProductPic> T_ProductPic { get; set; }
+        public DbSet<T_FruitPic> T_FruitPic { get; set; }
     }
 }

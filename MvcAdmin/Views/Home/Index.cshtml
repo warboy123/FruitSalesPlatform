@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "水果销售后台";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    h1 {
+        font-size: 40px;
+        color:white;
+        margin:10px 200px 10px 20px;
+        float:left;
+        
+    }
+    ul.ulMainMenu {
+        list-style:none;
+        padding:0px;
+        margin:0px;
+        font-size:14px;
+        font-weight:400;
+    }
+    ul.ulMainMenu li{
+        height:20px;
+        line-height:20px;
+    }
+    div.divHeaderUser {
+        color:white;
+        float:right;
+        font-size:16px;
+        margin-top:30px;
+        margin-right:20px;
+    }
+</style>
+<div data-options="region:'north',border:false" style=" background: #0081c2;  overflow: hidden;">
+    <h1>水果销售后台管理</h1>
+    <div class="divHeaderUser">您好：xxxx</div>
+</div>
+<div data-options="region:'west',split:true" style="width: 150px;">
+    <div class="easyui-accordion" data-options="fit:true,border:false">
+        <div title="用户管理" data-options="selected:true" style="padding: 10px;">
+            <ul class="ulMainMenu">
+                <li>注册的用户</li>
+                <li>注册的用户</li>
+            </ul>
+        </div>
+        <div title="销售管理"  style="padding: 10px;">
+            content2
+        </div>
+        <div title="库存管理" style="padding: 10px">
+            <ul class="ulMainMenu">
+                <li>入库</li>
+                <li>库存</li>
+                <li>调配</li>
+            </ul>
+        </div>
+        <div title="物流管理" style="padding: 10px">
+            content3
+        </div>
+        <div title="公告管理" style="padding: 10px">
+            content3
+        </div>
+    </div>
+</div>
+<div data-options="region:'east',split:false,collapsed:false" style="width: 0px; "></div>
+<div data-options="region:'south',border:false" style="height: 0px;"></div>
+<div data-options="region:'center'"></div>

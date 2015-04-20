@@ -39,12 +39,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FruitPicDTO.cs" />
     <Compile Include="FruitsDTO.cs" />
     <Compile Include="InventoryDTO.cs" />
+    <Compile Include="ManagerDTO.cs" />
+    <Compile Include="ManagerPermissionDTO.cs" />
+    <Compile Include="PermissionDTO.cs" />
     <Compile Include="PlaceDTO.cs" />
     <Compile Include="PostAddressDTO.cs" />
     <Compile Include="ProductFruitsDTO.cs" />
     <Compile Include="ProductOrdersDTO.cs" />
+    <Compile Include="ProductPicDTO.cs" />
     <Compile Include="ProductsDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StockinDTO.cs" />
@@ -68,12 +73,17 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>EntitisBuild.cs</LastGenOutput>
       <LastOutputs>
+..\FruitPicDTO.cs
 ..\FruitsDTO.cs
 ..\InventoryDTO.cs
+..\ManagerDTO.cs
+..\ManagerPermissionDTO.cs
+..\PermissionDTO.cs
 ..\PlaceDTO.cs
 ..\PostAddressDTO.cs
 ..\ProductFruitsDTO.cs
 ..\ProductOrdersDTO.cs
+..\ProductPicDTO.cs
 ..\ProductsDTO.cs
 ..\StockinDTO.cs
 ..\StorageDTO.cs

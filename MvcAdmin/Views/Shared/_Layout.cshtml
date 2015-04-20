@@ -3,14 +3,15 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <title>@ViewBag.Title</title> 
+     <link href="~/EasyUI/themes/bootstrap/easyui.css" rel="stylesheet" />
+    <link href="~/EasyUI/themes/icon.css" rel="stylesheet" />
+    <script src="~/EasyUI/jquery.min.js"></script>
+    <script src="~/EasyUI/jquery.easyui.min.js"></script>
+    
+   
 </head>
-<body>
+<body class="easyui-layout">
     @RenderBody()
-
-    @Scripts.Render("~/bundles/jquery")
-    @RenderSection("scripts", required: false)
 </body>
 </html>

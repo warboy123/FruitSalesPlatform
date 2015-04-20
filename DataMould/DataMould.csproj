@@ -65,10 +65,22 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SqlServer.edmx</DependentUpon>
     </Compile>
+    <Compile Include="T_FruitPic.cs">
+      <DependentUpon>SqlServer.tt</DependentUpon>
+    </Compile>
     <Compile Include="T_Fruits.cs">
       <DependentUpon>SqlServer.tt</DependentUpon>
     </Compile>
     <Compile Include="T_Inventory.cs">
+      <DependentUpon>SqlServer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T_Manager.cs">
+      <DependentUpon>SqlServer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T_ManagerPermission.cs">
+      <DependentUpon>SqlServer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T_Permission.cs">
       <DependentUpon>SqlServer.tt</DependentUpon>
     </Compile>
     <Compile Include="T_Place.cs">
@@ -78,6 +90,9 @@
       <DependentUpon>SqlServer.tt</DependentUpon>
     </Compile>
     <Compile Include="T_ProductOrders.cs">
+      <DependentUpon>SqlServer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T_ProductPic.cs">
       <DependentUpon>SqlServer.tt</DependentUpon>
     </Compile>
     <Compile Include="T_Products.cs">

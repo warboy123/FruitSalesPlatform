@@ -18,6 +18,7 @@ namespace DataMould
         {
             this.Enabled = true;
             this.C_ProductFruitS = new HashSet<C_ProductFruits>();
+            this.T_ProductPic = new HashSet<T_ProductPic>();
         }
     
         public int ProductID { get; set; }
@@ -29,5 +30,6 @@ namespace DataMould
         public string Detail { get; set; }
     
         public virtual ICollection<C_ProductFruits> C_ProductFruitS { get; set; }
+        public virtual ICollection<T_ProductPic> T_ProductPic { get; set; }
     }
 }

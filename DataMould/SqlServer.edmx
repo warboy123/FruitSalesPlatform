@@ -19,6 +19,11 @@
     <EntitySet Name="T_Storage" EntityType="SqlServer.Store.T_Storage" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="T_Supplier" EntityType="SqlServer.Store.T_Supplier" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="T_SupplierFruit" EntityType="SqlServer.Store.T_SupplierFruit" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_Manager" EntityType="SqlServer.Store.T_Manager" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_Permission" EntityType="SqlServer.Store.T_Permission" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_ManagerPermission" EntityType="SqlServer.Store.T_ManagerPermission" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_ProductPic" EntityType="SqlServer.Store.T_ProductPic" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_FruitPic" EntityType="SqlServer.Store.T_FruitPic" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="T_UserT_PostAddress" Association="SqlServer.Store.T_UserT_PostAddress">
       <End Role="T_User" EntitySet="T_User" />
       <End Role="T_PostAddress" EntitySet="T_PostAddress" />
@@ -58,6 +63,22 @@
     <AssociationSet Name="T_FruitsT_SupplierFruit" Association="SqlServer.Store.T_FruitsT_SupplierFruit">
       <End Role="T_Fruits" EntitySet="T_Fruits" />
       <End Role="T_SupplierFruit" EntitySet="T_SupplierFruit" />
+    </AssociationSet>
+    <AssociationSet Name="T_PermissionT_ManagerPermission" Association="SqlServer.Store.T_PermissionT_ManagerPermission">
+      <End Role="T_Permission" EntitySet="T_Permission" />
+      <End Role="T_ManagerPermission" EntitySet="T_ManagerPermission" />
+    </AssociationSet>
+    <AssociationSet Name="T_ManagerT_ManagerPermission" Association="SqlServer.Store.T_ManagerT_ManagerPermission">
+      <End Role="T_Manager" EntitySet="T_Manager" />
+      <End Role="T_ManagerPermission" EntitySet="T_ManagerPermission" />
+    </AssociationSet>
+    <AssociationSet Name="T_ProductsT_ProductPic" Association="SqlServer.Store.T_ProductsT_ProductPic">
+      <End Role="T_Products" EntitySet="T_Products" />
+      <End Role="T_ProductPic" EntitySet="T_ProductPic" />
+    </AssociationSet>
+    <AssociationSet Name="T_FruitsT_FruitPic" Association="SqlServer.Store.T_FruitsT_FruitPic">
+      <End Role="T_Fruits" EntitySet="T_Fruits" />
+      <End Role="T_FruitPic" EntitySet="T_FruitPic" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="T_User">
@@ -222,6 +243,64 @@
     <Property Name="T_Supplier_SupplierID" Type="int" Nullable="false" />
     <Property Name="T_Fruits_FruitID" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="T_Manager">
+    <Key>
+      <PropertyRef Name="ManagerID" />
+    </Key>
+    <Property Name="ManagerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LoginNum" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="PassWord" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="Enabled" Type="bit" Nullable="false" DefaultValue="true" />
+    <Property Name="DateCreate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="T_Permission">
+    <Key>
+      <PropertyRef Name="PermissionID" />
+    </Key>
+    <Property Name="PermissionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PermissionName" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="PermissionNum" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="ParentNum" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="PermissionType" Type="tinyint" Nullable="false" />
+    <Property Name="PermissionUrl" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="PermissionAction" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="PermissionStyle" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="Enabled" Type="bit" Nullable="false" DefaultValue="true" />
+  </EntityType>
+  <EntityType Name="T_ManagerPermission">
+    <Key>
+      <PropertyRef Name="ManagerPermissionID" />
+    </Key>
+    <Property Name="ManagerPermissionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ManagerID" Type="int" Nullable="false" />
+    <Property Name="PermissionID" Type="int" Nullable="false" />
+    <Property Name="Enabled" Type="bit" Nullable="false" DefaultValue="true" />
+    <Property Name="Permission" Type="tinyint" Nullable="false" DefaultValue="1" />
+    <Property Name="T_Permission_PermissionID" Type="int" Nullable="false" />
+    <Property Name="T_Manager_ManagerID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="T_ProductPic">
+    <Key>
+      <PropertyRef Name="ProductPicID" />
+    </Key>
+    <Property Name="ProductPicID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PicURL" Type="nvarchar" Nullable="false" MaxLength="500" />
+    <Property Name="ThumbPicURL" Type="nvarchar" Nullable="false" MaxLength="500" />
+    <Property Name="DateCreate" Type="datetime" Nullable="false" />
+    <Property Name="ProductID" Type="int" Nullable="false" />
+    <Property Name="T_Products_ProductID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="T_FruitPic">
+    <Key>
+      <PropertyRef Name="FruitPicID" />
+    </Key>
+    <Property Name="FruitPicID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PicURL" Type="nvarchar" Nullable="false" MaxLength="500" />
+    <Property Name="ThumbPicURL" Type="nvarchar" Nullable="false" MaxLength="500" />
+    <Property Name="DateCreate" Type="datetime" Nullable="false" />
+    <Property Name="FruitID" Type="int" Nullable="false" />
+    <Property Name="T_Fruits_FruitID" Type="int" Nullable="false" />
+  </EntityType>
   <Association Name="T_UserT_PostAddress">
     <End Role="T_User" Type="SqlServer.Store.T_User" Multiplicity="1" />
     <End Role="T_PostAddress" Type="SqlServer.Store.T_PostAddress" Multiplicity="*" />
@@ -342,6 +421,54 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="T_PermissionT_ManagerPermission">
+    <End Role="T_Permission" Type="SqlServer.Store.T_Permission" Multiplicity="1" />
+    <End Role="T_ManagerPermission" Type="SqlServer.Store.T_ManagerPermission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_Permission">
+        <PropertyRef Name="PermissionID" />
+      </Principal>
+      <Dependent Role="T_ManagerPermission">
+        <PropertyRef Name="T_Permission_PermissionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="T_ManagerT_ManagerPermission">
+    <End Role="T_Manager" Type="SqlServer.Store.T_Manager" Multiplicity="1" />
+    <End Role="T_ManagerPermission" Type="SqlServer.Store.T_ManagerPermission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_Manager">
+        <PropertyRef Name="ManagerID" />
+      </Principal>
+      <Dependent Role="T_ManagerPermission">
+        <PropertyRef Name="T_Manager_ManagerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="T_ProductsT_ProductPic">
+    <End Role="T_Products" Type="SqlServer.Store.T_Products" Multiplicity="1" />
+    <End Role="T_ProductPic" Type="SqlServer.Store.T_ProductPic" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_Products">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="T_ProductPic">
+        <PropertyRef Name="T_Products_ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="T_FruitsT_FruitPic">
+    <End Role="T_Fruits" Type="SqlServer.Store.T_Fruits" Multiplicity="1" />
+    <End Role="T_FruitPic" Type="SqlServer.Store.T_FruitPic" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_Fruits">
+        <PropertyRef Name="FruitID" />
+      </Principal>
+      <Dependent Role="T_FruitPic">
+        <PropertyRef Name="T_Fruits_FruitID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -399,6 +526,27 @@
           <AssociationSet Name="T_FruitsT_SupplierFruit" Association="SqlServer.T_FruitsT_SupplierFruit">
             <End Role="T_Fruits" EntitySet="T_Fruits" />
             <End Role="T_SupplierFruit" EntitySet="T_SupplierFruit" />
+          </AssociationSet>
+          <EntitySet Name="T_Manager" EntityType="SqlServer.T_Manager" />
+          <EntitySet Name="T_Permission" EntityType="SqlServer.T_Permission" />
+          <EntitySet Name="T_ManagerPermission" EntityType="SqlServer.T_ManagerPermission" />
+          <AssociationSet Name="T_PermissionT_ManagerPermission" Association="SqlServer.T_PermissionT_ManagerPermission">
+            <End Role="T_Permission" EntitySet="T_Permission" />
+            <End Role="T_ManagerPermission" EntitySet="T_ManagerPermission" />
+          </AssociationSet>
+          <AssociationSet Name="T_ManagerT_ManagerPermission" Association="SqlServer.T_ManagerT_ManagerPermission">
+            <End Role="T_Manager" EntitySet="T_Manager" />
+            <End Role="T_ManagerPermission" EntitySet="T_ManagerPermission" />
+          </AssociationSet>
+          <EntitySet Name="T_ProductPic" EntityType="SqlServer.T_ProductPic" />
+          <AssociationSet Name="T_ProductsT_ProductPic" Association="SqlServer.T_ProductsT_ProductPic">
+            <End Role="T_Products" EntitySet="T_Products" />
+            <End Role="T_ProductPic" EntitySet="T_ProductPic" />
+          </AssociationSet>
+          <EntitySet Name="T_FruitPic" EntityType="SqlServer.T_FruitPic" />
+          <AssociationSet Name="T_FruitsT_FruitPic" Association="SqlServer.T_FruitsT_FruitPic">
+            <End Role="T_Fruits" EntitySet="T_Fruits" />
+            <End Role="T_FruitPic" EntitySet="T_FruitPic" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="T_User">
@@ -508,6 +656,7 @@
             </Documentation>
           </Property>
           <Property Type="String" Name="Detail" Nullable="false" />
+          <NavigationProperty Name="T_ProductPic" Relationship="SqlServer.T_ProductsT_ProductPic" FromRole="T_Products" ToRole="T_ProductPic" />
         </EntityType>
         <EntityType Name="T_Fruits">
           <Key>
@@ -560,6 +709,7 @@
           <NavigationProperty Name="T_Inventory" Relationship="SqlServer.T_FruitsT_Inventory" FromRole="T_Fruits" ToRole="T_Inventory" />
           <NavigationProperty Name="T_Storage" Relationship="SqlServer.T_FruitsT_Storage" FromRole="T_Fruits" ToRole="T_Storage" />
           <NavigationProperty Name="T_SupplierFruit" Relationship="SqlServer.T_FruitsT_SupplierFruit" FromRole="T_Fruits" ToRole="T_SupplierFruit" />
+          <NavigationProperty Name="T_FruitPic" Relationship="SqlServer.T_FruitsT_FruitPic" FromRole="T_Fruits" ToRole="T_FruitPic" />
         </EntityType>
         <EntityType Name="T_PostAddress">
           <Documentation>
@@ -760,6 +910,82 @@
           <End Type="SqlServer.T_Fruits" Role="T_Fruits" Multiplicity="1" />
           <End Type="SqlServer.T_SupplierFruit" Role="T_SupplierFruit" Multiplicity="*" />
         </Association>
+        <EntityType Name="T_Manager">
+          <Key>
+            <PropertyRef Name="ManagerID" />
+          </Key>
+          <Property Type="Int32" Name="ManagerID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="LoginNum" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="PassWord" Nullable="false" MaxLength="200" />
+          <Property Type="Boolean" Name="Enabled" Nullable="false" DefaultValue="true" />
+          <Property Type="DateTime" Name="DateCreate" Nullable="false" />
+          <NavigationProperty Name="T_ManagerPermission" Relationship="SqlServer.T_ManagerT_ManagerPermission" FromRole="T_Manager" ToRole="T_ManagerPermission" />
+        </EntityType>
+        <EntityType Name="T_Permission">
+          <Key>
+            <PropertyRef Name="PermissionID" />
+          </Key>
+          <Property Type="Int32" Name="PermissionID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="PermissionName" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="PermissionNum" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="ParentNum" Nullable="false" MaxLength="200" />
+          <Property Type="Byte" Name="PermissionType" Nullable="false" />
+          <Property Type="String" Name="PermissionUrl" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="PermissionAction" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="PermissionStyle" Nullable="false" MaxLength="200" />
+          <Property Type="Boolean" Name="Enabled" Nullable="false" DefaultValue="true" />
+          <NavigationProperty Name="T_ManagerPermission" Relationship="SqlServer.T_PermissionT_ManagerPermission" FromRole="T_Permission" ToRole="T_ManagerPermission" />
+        </EntityType>
+        <EntityType Name="T_ManagerPermission">
+          <Key>
+            <PropertyRef Name="ManagerPermissionID" />
+          </Key>
+          <Property Type="Int32" Name="ManagerPermissionID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ManagerID" Nullable="false" />
+          <Property Type="Int32" Name="PermissionID" Nullable="false" />
+          <Property Type="Boolean" Name="Enabled" Nullable="false" DefaultValue="true" />
+          <Property Type="Byte" Name="Permission" Nullable="false" DefaultValue="1" />
+          <NavigationProperty Name="T_Permission" Relationship="SqlServer.T_PermissionT_ManagerPermission" FromRole="T_ManagerPermission" ToRole="T_Permission" />
+          <NavigationProperty Name="T_Manager" Relationship="SqlServer.T_ManagerT_ManagerPermission" FromRole="T_ManagerPermission" ToRole="T_Manager" />
+        </EntityType>
+        <Association Name="T_PermissionT_ManagerPermission">
+          <End Type="SqlServer.T_Permission" Role="T_Permission" Multiplicity="1" />
+          <End Type="SqlServer.T_ManagerPermission" Role="T_ManagerPermission" Multiplicity="*" />
+        </Association>
+        <Association Name="T_ManagerT_ManagerPermission">
+          <End Type="SqlServer.T_Manager" Role="T_Manager" Multiplicity="1" />
+          <End Type="SqlServer.T_ManagerPermission" Role="T_ManagerPermission" Multiplicity="*" />
+        </Association>
+        <EntityType Name="T_ProductPic">
+          <Key>
+            <PropertyRef Name="ProductPicID" />
+          </Key>
+          <Property Type="Int32" Name="ProductPicID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="PicURL" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="ThumbPicURL" Nullable="false" MaxLength="500" />
+          <Property Type="DateTime" Name="DateCreate" Nullable="false" />
+          <Property Type="Int32" Name="ProductID" Nullable="false" />
+          <NavigationProperty Name="T_Products" Relationship="SqlServer.T_ProductsT_ProductPic" FromRole="T_ProductPic" ToRole="T_Products" />
+        </EntityType>
+        <Association Name="T_ProductsT_ProductPic">
+          <End Type="SqlServer.T_Products" Role="T_Products" Multiplicity="1" />
+          <End Type="SqlServer.T_ProductPic" Role="T_ProductPic" Multiplicity="*" />
+        </Association>
+        <EntityType Name="T_FruitPic">
+          <Key>
+            <PropertyRef Name="FruitPicID" />
+          </Key>
+          <Property Type="Int32" Name="FruitPicID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="PicURL" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="ThumbPicURL" Nullable="false" MaxLength="500" />
+          <Property Type="DateTime" Name="DateCreate" Nullable="false" />
+          <Property Type="Int32" Name="FruitID" Nullable="false" />
+          <NavigationProperty Name="T_Fruits" Relationship="SqlServer.T_FruitsT_FruitPic" FromRole="T_FruitPic" ToRole="T_Fruits" />
+        </EntityType>
+        <Association Name="T_FruitsT_FruitPic">
+          <End Type="SqlServer.T_Fruits" Role="T_Fruits" Multiplicity="1" />
+          <End Type="SqlServer.T_FruitPic" Role="T_FruitPic" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -931,6 +1157,65 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="T_Manager">
+      <EntityTypeMapping TypeName="IsTypeOf(SqlServer.T_Manager)">
+        <MappingFragment StoreEntitySet="T_Manager">
+          <ScalarProperty Name="ManagerID" ColumnName="ManagerID" />
+          <ScalarProperty Name="LoginNum" ColumnName="LoginNum" />
+          <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+          <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+          <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_Permission">
+      <EntityTypeMapping TypeName="IsTypeOf(SqlServer.T_Permission)">
+        <MappingFragment StoreEntitySet="T_Permission">
+          <ScalarProperty Name="PermissionID" ColumnName="PermissionID" />
+          <ScalarProperty Name="PermissionName" ColumnName="PermissionName" />
+          <ScalarProperty Name="PermissionNum" ColumnName="PermissionNum" />
+          <ScalarProperty Name="ParentNum" ColumnName="ParentNum" />
+          <ScalarProperty Name="PermissionType" ColumnName="PermissionType" />
+          <ScalarProperty Name="PermissionUrl" ColumnName="PermissionUrl" />
+          <ScalarProperty Name="PermissionAction" ColumnName="PermissionAction" />
+          <ScalarProperty Name="PermissionStyle" ColumnName="PermissionStyle" />
+          <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_ManagerPermission">
+      <EntityTypeMapping TypeName="IsTypeOf(SqlServer.T_ManagerPermission)">
+        <MappingFragment StoreEntitySet="T_ManagerPermission">
+          <ScalarProperty Name="ManagerPermissionID" ColumnName="ManagerPermissionID" />
+          <ScalarProperty Name="ManagerID" ColumnName="ManagerID" />
+          <ScalarProperty Name="PermissionID" ColumnName="PermissionID" />
+          <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+          <ScalarProperty Name="Permission" ColumnName="Permission" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_ProductPic">
+      <EntityTypeMapping TypeName="IsTypeOf(SqlServer.T_ProductPic)">
+        <MappingFragment StoreEntitySet="T_ProductPic">
+          <ScalarProperty Name="ProductPicID" ColumnName="ProductPicID" />
+          <ScalarProperty Name="PicURL" ColumnName="PicURL" />
+          <ScalarProperty Name="ThumbPicURL" ColumnName="ThumbPicURL" />
+          <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_FruitPic">
+      <EntityTypeMapping TypeName="IsTypeOf(SqlServer.T_FruitPic)">
+        <MappingFragment StoreEntitySet="T_FruitPic">
+          <ScalarProperty Name="FruitPicID" ColumnName="FruitPicID" />
+          <ScalarProperty Name="PicURL" ColumnName="PicURL" />
+          <ScalarProperty Name="ThumbPicURL" ColumnName="ThumbPicURL" />
+          <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
+          <ScalarProperty Name="FruitID" ColumnName="FruitID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="T_UserT_PostAddress" TypeName="SqlServer.T_UserT_PostAddress" StoreEntitySet="T_PostAddress">
       <EndProperty Name="T_User">
         <ScalarProperty Name="UserID" ColumnName="T_User_UserID" />
@@ -1009,6 +1294,38 @@
       </EndProperty>
       <EndProperty Name="T_SupplierFruit">
         <ScalarProperty Name="SupplierFruitID" ColumnName="SupplierFruitID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="T_PermissionT_ManagerPermission" TypeName="SqlServer.T_PermissionT_ManagerPermission" StoreEntitySet="T_ManagerPermission">
+      <EndProperty Name="T_Permission">
+        <ScalarProperty Name="PermissionID" ColumnName="T_Permission_PermissionID" />
+      </EndProperty>
+      <EndProperty Name="T_ManagerPermission">
+        <ScalarProperty Name="ManagerPermissionID" ColumnName="ManagerPermissionID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="T_ManagerT_ManagerPermission" TypeName="SqlServer.T_ManagerT_ManagerPermission" StoreEntitySet="T_ManagerPermission">
+      <EndProperty Name="T_Manager">
+        <ScalarProperty Name="ManagerID" ColumnName="T_Manager_ManagerID" />
+      </EndProperty>
+      <EndProperty Name="T_ManagerPermission">
+        <ScalarProperty Name="ManagerPermissionID" ColumnName="ManagerPermissionID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="T_ProductsT_ProductPic" TypeName="SqlServer.T_ProductsT_ProductPic" StoreEntitySet="T_ProductPic">
+      <EndProperty Name="T_Products">
+        <ScalarProperty Name="ProductID" ColumnName="T_Products_ProductID" />
+      </EndProperty>
+      <EndProperty Name="T_ProductPic">
+        <ScalarProperty Name="ProductPicID" ColumnName="ProductPicID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="T_FruitsT_FruitPic" TypeName="SqlServer.T_FruitsT_FruitPic" StoreEntitySet="T_FruitPic">
+      <EndProperty Name="T_Fruits">
+        <ScalarProperty Name="FruitID" ColumnName="T_Fruits_FruitID" />
+      </EndProperty>
+      <EndProperty Name="T_FruitPic">
+        <ScalarProperty Name="FruitPicID" ColumnName="FruitPicID" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>

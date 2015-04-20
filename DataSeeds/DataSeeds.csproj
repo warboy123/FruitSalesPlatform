@@ -39,12 +39,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FruitPicSeed.cs" />
     <Compile Include="FruitsSeed.cs" />
     <Compile Include="InventorySeed.cs" />
+    <Compile Include="ManagerPermissionSeed.cs" />
+    <Compile Include="ManagerSeed.cs" />
+    <Compile Include="PermissionSeed.cs" />
     <Compile Include="PlaceSeed.cs" />
     <Compile Include="PostAddressSeed.cs" />
     <Compile Include="ProductFruitsSeed.cs" />
     <Compile Include="ProductOrdersSeed.cs" />
+    <Compile Include="ProductPicSeed.cs" />
     <Compile Include="ProductsSeed.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StockinSeed.cs" />
@@ -76,12 +81,17 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>EntitisBuild1.cs</LastGenOutput>
       <LastOutputs>
+..\FruitPicSeed.cs
 ..\FruitsSeed.cs
 ..\InventorySeed.cs
+..\ManagerPermissionSeed.cs
+..\ManagerSeed.cs
+..\PermissionSeed.cs
 ..\PlaceSeed.cs
 ..\PostAddressSeed.cs
 ..\ProductFruitsSeed.cs
 ..\ProductOrdersSeed.cs
+..\ProductPicSeed.cs
 ..\ProductsSeed.cs
 ..\StockinSeed.cs
 ..\StorageSeed.cs

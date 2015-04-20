@@ -17,6 +17,7 @@ namespace Entities
 		{
 			this.Enabled = true;
 			this.C_ProductFruitS = new HashSet<C_ProductFruits>();
+			this.T_ProductPic = new HashSet<T_ProductPic>();
 		}		
         /// <summary>
         /// 产品ID
@@ -63,6 +64,11 @@ namespace Entities
         /// </summary>
 
 		public virtual ICollection<C_ProductFruits> C_ProductFruitS { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+
+		public virtual ICollection<T_ProductPic> T_ProductPic { get; set; }
 		
 	}
 }

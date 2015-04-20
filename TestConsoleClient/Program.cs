@@ -15,16 +15,8 @@ namespace TestConsoleClient
     {
         public static IFruitsService _fruit;
        
-        public Program()
-        {
-            
-            
-        }
-       
         static void Main(string[] args)
         {
-           
-            Console.ReadLine();
             UnityContainer container = new UnityContainer();
             Assembly[] assemblyList = Depandency.LoadAssembly();
             Depandency.RegisterAssembly(ref container, assemblyList);

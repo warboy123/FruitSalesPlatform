@@ -22,6 +22,7 @@ namespace DataMould
             this.T_Inventory = new HashSet<T_Inventory>();
             this.T_Storage = new HashSet<T_Storage>();
             this.T_SupplierFruit = new HashSet<T_SupplierFruit>();
+            this.T_FruitPic = new HashSet<T_FruitPic>();
         }
     
         public int FruitID { get; set; }
@@ -37,5 +38,6 @@ namespace DataMould
         public virtual ICollection<T_Inventory> T_Inventory { get; set; }
         public virtual ICollection<T_Storage> T_Storage { get; set; }
         public virtual ICollection<T_SupplierFruit> T_SupplierFruit { get; set; }
+        public virtual ICollection<T_FruitPic> T_FruitPic { get; set; }
     }
 }

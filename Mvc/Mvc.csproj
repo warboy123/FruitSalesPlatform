@@ -272,6 +272,10 @@
       <Project>{8dfac289-15d2-4619-a45d-e926ce4280a2}</Project>
       <Name>Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DataSeeds\DataSeeds.csproj">
+      <Project>{19cd3adf-17fb-4236-9068-181b9ad0065a}</Project>
+      <Name>DataSeeds</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DTO\DTO.csproj">
       <Project>{1b7ff698-9ca9-4ff7-bad9-ccd6136397c2}</Project>
       <Name>DTO</Name>
